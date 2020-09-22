@@ -22,7 +22,12 @@
     <ClCompile Include="SDLLessonsResources\01_hello_SDL.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\down.bmp" />
     <Image Include="Assets\hello.bmp" />
+    <Image Include="Assets\left.bmp" />
+    <Image Include="Assets\press.bmp" />
+    <Image Include="Assets\right.bmp" />
+    <Image Include="Assets\up.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
