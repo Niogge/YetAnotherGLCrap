@@ -19,9 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SDLLessonsResources\01_hello_SDL.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <Image Include="Assets\background.png" />
+    <Image Include="Assets\foo.png" />
     <Image Include="Assets\Guy.PNG" />
     <Image Include="Assets\down.bmp" />
     <Image Include="Assets\hello.bmp" />
@@ -29,7 +28,15 @@
     <Image Include="Assets\press.bmp" />
     <Image Include="Assets\right.bmp" />
     <Image Include="Assets\texture.png" />
+    <Image Include="Assets\Tikki.png" />
     <Image Include="Assets\up.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\LTexture.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\Main.cpp" />
+    <ClCompile Include="Code\LTexture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

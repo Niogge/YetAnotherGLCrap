@@ -7,6 +7,7 @@ and may not be redistributed without written permission.*/
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include "LTexture.h"
 
 
 //Screen dimension constants
@@ -29,9 +30,9 @@ SDL_Surface* gCurrentSurface = NULL;
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 SDL_Renderer* gRenderer = NULL;
-SDL_Surface* gPNGSurface = NULL;
-SDL_Texture* gTexture = NULL;
 
+SDL_Rect gSpriteClips[4];
+LTexture* gSpriteSheetTexture;
 
 int main(int argc, char* args[])
 {
@@ -102,33 +103,16 @@ int main(int argc, char* args[])
 
 				SDL_RenderClear(gRenderer);
 
-
-				SDL_Rect topLeftViewPort;
-				topLeftViewPort.x = 0;
-				topLeftViewPort.y = 0;
-				topLeftViewPort.w = SCREEN_WIDTH / 2;
-				topLeftViewPort.h = SCREEN_HEIGHT / 2;
-				SDL_RenderSetViewport(gRenderer, &topLeftViewPort);
-				SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
-
-
-				SDL_Rect topRightViewPort;
-				topRightViewPort.x = SCREEN_WIDTH / 2;
-				topRightViewPort.y = 0;
-				topRightViewPort.w = SCREEN_WIDTH / 2;
-				topRightViewPort.h = SCREEN_HEIGHT / 2;
-				SDL_RenderSetViewport(gRenderer, &topRightViewPort);
-
-				SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
-
-				SDL_Rect bottomViewPort;
-				bottomViewPort.x = 0;
-				bottomViewPort.y = SCREEN_HEIGHT/2;
-				bottomViewPort.w = SCREEN_WIDTH;
-				bottomViewPort.h = SCREEN_HEIGHT / 2;
-				SDL_RenderSetViewport(gRenderer, &bottomViewPort);
-
-				SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
+				//gBackgroundTexture->render(0, 0);
+				//gFooTexture->render(240, 190);
+				gSpriteSheetTexture->setColor(0xFF, 0xFF, 0xFF);
+				gSpriteSheetTexture->render(0, 0, &gSpriteClips[0]);
+				gSpriteSheetTexture->setColor(0xFF, 0, 0);
+				gSpriteSheetTexture->render(SCREEN_WIDTH-gSpriteClips[1].w, 0, &gSpriteClips[1]);
+				gSpriteSheetTexture->setColor(0, 0xFF, 0);
+				gSpriteSheetTexture->render(0, SCREEN_HEIGHT- gSpriteClips[2].h, &gSpriteClips[2]);
+				gSpriteSheetTexture->setColor(0, 0, 0xFF);
+				gSpriteSheetTexture->render(SCREEN_WIDTH - gSpriteClips[3].w, SCREEN_HEIGHT - gSpriteClips[3].h, &gSpriteClips[3]);
 
 				SDL_RenderPresent(gRenderer);
 
@@ -160,7 +144,7 @@ bool init()
 	else
 	{
 		//create video
-		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		gWindow = SDL_CreateWindow("SDL Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -178,7 +162,7 @@ bool init()
 			{
 
 				//init Render Color
-				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				SDL_SetRenderDrawColor(gRenderer, 0x8A, 0x8A, 0x8A, 0xFF);
 
 				int imgFlags = IMG_INIT_PNG;// init png support
 				if (!(IMG_Init(imgFlags) & imgFlags))
@@ -189,7 +173,7 @@ bool init()
 				else
 				{
 					gScreenSurface = SDL_GetWindowSurface(gWindow);
-
+					gSpriteSheetTexture = new LTexture();
 				}
 			}
 
@@ -211,12 +195,37 @@ bool loadMedia()
 		success = false;
 	}*/
 
-	gTexture = loadTexture("Assets/texture.png");
-	if (gTexture == NULL)
+	if (!gSpriteSheetTexture->loadFrom("Assets/Tikki.png", gRenderer))
 	{
-		printf("Failed to load texture!\n");
+		printf("Failed to load Tikki' texture image!\n");
 		success = false;
 	}
+	else
+	{
+		//TL
+		gSpriteClips[0].x = 0;
+		gSpriteClips[0].y = 0;
+		gSpriteClips[0].w = 80;
+		gSpriteClips[0].h = 80;
+		//TR
+		gSpriteClips[1].x = 80;
+		gSpriteClips[1].y = 0;
+		gSpriteClips[1].w = 80;
+		gSpriteClips[1].h = 80;
+
+		//BL
+		gSpriteClips[2].x = 0;
+		gSpriteClips[2].y = 80;
+		gSpriteClips[2].w = 80;
+		gSpriteClips[2].h = 80;
+		//BR
+		gSpriteClips[3].x = 80;
+		gSpriteClips[3].y = 80;
+		gSpriteClips[3].w = 80;
+		gSpriteClips[3].h = 80;
+	}
+
+
 
 	return success;
 }
@@ -226,18 +235,9 @@ void close()
 	SDL_FreeSurface(gCurrentSurface);
 	gCurrentSurface = NULL;
 
-	//SDL_FreeSurface(gKeyPressSurfaces[KEY_PRESS_SURFACE_LEFT]);
-	//gKeyPressSurfaces[KEY_PRESS_SURFACE_LEFT] = NULL;
-	//SDL_FreeSurface(gKeyPressSurfaces[KEY_PRESS_SURFACE_UP]);
-	//gKeyPressSurfaces[KEY_PRESS_SURFACE_UP] = NULL;
-	//SDL_FreeSurface(gKeyPressSurfaces[KEY_PRESS_SURFACE_DOWN]);
-	//gKeyPressSurfaces[KEY_PRESS_SURFACE_DOWN] = NULL;
-	//SDL_FreeSurface(gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT]);
-	//gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT] = NULL;
-
 	//free texture
-	SDL_DestroyTexture(gTexture);
-	gTexture = NULL;
+	gSpriteSheetTexture->free();
+	//gBackgroundTexture->free();
 
 	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
@@ -283,26 +283,26 @@ SDL_Surface* loadSurface(std::string path)
 	return optimizedSurface;
 }
 
-SDL_Texture* loadTexture(std::string path)
-{
-	SDL_Texture* newTexture = NULL;
-
-	//Load Image
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-	}
-	else
-	{
-		//create texture from surface 
-		newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
-		if (newTexture == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-		}
-
-		SDL_FreeSurface(loadedSurface);
-	}
-	return newTexture;
-}
+//SDL_Texture* loadTexture(std::string path)
+//{
+//	SDL_Texture* newTexture = NULL;
+//
+//	//Load Image
+//	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+//	if (loadedSurface == NULL)
+//	{
+//		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+//	}
+//	else
+//	{
+//		//create texture from surface 
+//		newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
+//		if (newTexture == NULL)
+//		{
+//			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+//		}
+//
+//		SDL_FreeSurface(loadedSurface);
+//	}
+//	return newTexture;
+//}
