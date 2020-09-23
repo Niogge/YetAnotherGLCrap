@@ -100,12 +100,38 @@ int main(int argc, char* args[])
 					}
 				}
 
-
 				SDL_RenderClear(gRenderer);
 
+
+				SDL_Rect topLeftViewPort;
+				topLeftViewPort.x = 0;
+				topLeftViewPort.y = 0;
+				topLeftViewPort.w = SCREEN_WIDTH / 2;
+				topLeftViewPort.h = SCREEN_HEIGHT / 2;
+				SDL_RenderSetViewport(gRenderer, &topLeftViewPort);
 				SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
-				
+
+
+				SDL_Rect topRightViewPort;
+				topRightViewPort.x = SCREEN_WIDTH / 2;
+				topRightViewPort.y = 0;
+				topRightViewPort.w = SCREEN_WIDTH / 2;
+				topRightViewPort.h = SCREEN_HEIGHT / 2;
+				SDL_RenderSetViewport(gRenderer, &topRightViewPort);
+
+				SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
+
+				SDL_Rect bottomViewPort;
+				bottomViewPort.x = 0;
+				bottomViewPort.y = SCREEN_HEIGHT/2;
+				bottomViewPort.w = SCREEN_WIDTH;
+				bottomViewPort.h = SCREEN_HEIGHT / 2;
+				SDL_RenderSetViewport(gRenderer, &bottomViewPort);
+
+				SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
+
 				SDL_RenderPresent(gRenderer);
+
 
 				//SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
 				//Update the surface
