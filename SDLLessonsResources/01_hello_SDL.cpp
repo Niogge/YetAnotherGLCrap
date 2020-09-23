@@ -3,20 +3,11 @@ and may not be redistributed without written permission.*/
 
 //Using SDL and standard IO
 #include <SDL.h>
+#include <SDL_image.h>
 #include <stdio.h>
 #include <string>
 #include <iostream>
 
-enum KeyPressSurface
-{
-	KEY_PRESS_SURFACE_DEFAULT,
-	KEY_PRESS_SURFACE_UP,
-	KEY_PRESS_SURFACE_DOWN,
-	KEY_PRESS_SURFACE_LEFT,
-	KEY_PRESS_SURFACE_RIGHT,
-	KEY_PRESS_SURFACE_TOTAL,
-
-};
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
@@ -28,14 +19,19 @@ bool loadMedia();
 //FREEEEEEEEE
 void close();
 SDL_Surface* loadSurface(std::string path);
+SDL_Texture* loadTexture(std::string path);
 
-SDL_Surface* gKeyPressSurfaces[KEY_PRESS_SURFACE_TOTAL];
+
 
 SDL_Surface* gCurrentSurface = NULL;
 
 //globals
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
+SDL_Renderer* gRenderer = NULL;
+SDL_Surface* gPNGSurface = NULL;
+SDL_Texture* gTexture = NULL;
+
 
 int main(int argc, char* args[])
 {
@@ -47,7 +43,7 @@ int main(int argc, char* args[])
 	{
 
 		gScreenSurface = SDL_GetWindowSurface(gWindow);
-		SDL_FillRect(gScreenSurface, NULL, SDL_MapRGB(gScreenSurface->format, 0xFF, 0xFF, 0xFF));
+		SDL_FillRect(gScreenSurface, NULL, SDL_MapRGB(gScreenSurface->format, 0xAA, 0xAA, 0xAA));
 		if (!loadMedia())
 		{
 			printf("Failed to load media!\n");
@@ -58,7 +54,13 @@ int main(int argc, char* args[])
 
 			bool quit = false;
 			SDL_Event e;
-			gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_DEFAULT];
+
+			//stretch stuff
+			/*SDL_Rect stretchRect;
+			stretchRect.x = 0;
+			stretchRect.y = 0;
+			stretchRect.w = gPNGSurface->w;
+			stretchRect.h = gPNGSurface->h;*/
 
 			while (!quit)
 			{
@@ -76,31 +78,38 @@ int main(int argc, char* args[])
 						switch (e.key.keysym.sym)
 						{
 						case SDLK_UP:
-							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_UP];
+
 							break;
 
 						case SDLK_DOWN:
-							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_DOWN];
+
 							break;
 
 						case SDLK_LEFT:
-							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_LEFT];
+
 							break;
 
 						case SDLK_RIGHT:
-							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT];
+
 							break;
 
 						default:
-							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_DEFAULT];
+
 							break;
 						}
 					}
 				}
 
-				SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+
+				SDL_RenderClear(gRenderer);
+
+				SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
+				
+				SDL_RenderPresent(gRenderer);
+
+				//SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
 				//Update the surface
-				SDL_UpdateWindowSurface(gWindow);
+				//SDL_UpdateWindowSurface(gWindow);
 			}
 		}
 
@@ -133,7 +142,31 @@ bool init()
 		}
 		else
 		{
-			gScreenSurface = SDL_GetWindowSurface(gWindow);
+			gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+			if (gRenderer == NULL)
+			{
+				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+				success = false;
+			}
+			else
+			{
+
+				//init Render Color
+				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+				int imgFlags = IMG_INIT_PNG;// init png support
+				if (!(IMG_Init(imgFlags) & imgFlags))
+				{
+					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+					success = false;
+				}
+				else
+				{
+					gScreenSurface = SDL_GetWindowSurface(gWindow);
+
+				}
+			}
+
 		}
 	}
 
@@ -145,38 +178,17 @@ bool loadMedia()
 	bool success = true;
 
 	//Load default surface
-	gKeyPressSurfaces[KEY_PRESS_SURFACE_DEFAULT] = loadSurface("Assets/press.bmp");
-	if (gKeyPressSurfaces[KEY_PRESS_SURFACE_DEFAULT] == NULL)
+	/*gPNGSurface = loadSurface("Assets/Guy.PNG");
+	if (gPNGSurface == NULL)
 	{
 		printf("Failed to load default image!\n");
 		success = false;
-	}
-	//Load up surface
-	gKeyPressSurfaces[KEY_PRESS_SURFACE_UP] = loadSurface("Assets/up.bmp");
-	if (gKeyPressSurfaces[KEY_PRESS_SURFACE_UP] == NULL)
+	}*/
+
+	gTexture = loadTexture("Assets/texture.png");
+	if (gTexture == NULL)
 	{
-		printf("Failed to load up image!\n");
-		success = false;
-	}
-	//Load down surface
-	gKeyPressSurfaces[KEY_PRESS_SURFACE_DOWN] = loadSurface("Assets/down.bmp");
-	if (gKeyPressSurfaces[KEY_PRESS_SURFACE_DOWN] == NULL)
-	{
-		printf("Failed to load down image!\n");
-		success = false;
-	}
-	//Load left surface
-	gKeyPressSurfaces[KEY_PRESS_SURFACE_LEFT] = loadSurface("Assets/left.bmp");
-	if (gKeyPressSurfaces[KEY_PRESS_SURFACE_LEFT] == NULL)
-	{
-		printf("Failed to load left image!\n");
-		success = false;
-	}
-	//Load right surface
-	gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT] = loadSurface("Assets/right.bmp");
-	if (gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT] == NULL)
-	{
-		printf("Failed to load right image!\n");
+		printf("Failed to load texture!\n");
 		success = false;
 	}
 
@@ -197,19 +209,74 @@ void close()
 	//SDL_FreeSurface(gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT]);
 	//gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT] = NULL;
 
+	//free texture
+	SDL_DestroyTexture(gTexture);
+	gTexture = NULL;
 
+	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
+	gRenderer = NULL;
 
+	IMG_Quit();
 	SDL_Quit();
 }
 
 SDL_Surface* loadSurface(std::string path)
 {
-	SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
+	//SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
+	//if (loadedSurface == NULL)
+	//{
+	//	printf("Unable to load image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+	//}
+	//return loadedSurface;
+	SDL_Surface* optimizedSurface = NULL;
+
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	if (loadedSurface == NULL)
 	{
 		printf("Unable to load image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 	}
-	return loadedSurface;
+	else
+	{
+		//convert surface to screenFormat
+		optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, 0);
+		/*
+		when you load a bitmap, it's typically loaded in a 24bit format since most bitmaps are 24bit.
+		Most, if not all, modern displays are not 24bit by default.
+		If we blit an image that's 24bit onto a 32bit image, SDL will convert it every single time the image is blitted.
+		*/
+		if (optimizedSurface == NULL)
+		{
+			printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+		}
+		SDL_FreeSurface(loadedSurface);
+	}
+
+
+	return optimizedSurface;
+}
+
+SDL_Texture* loadTexture(std::string path)
+{
+	SDL_Texture* newTexture = NULL;
+
+	//Load Image
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	if (loadedSurface == NULL)
+	{
+		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+	}
+	else
+	{
+		//create texture from surface 
+		newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
+		if (newTexture == NULL)
+		{
+			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+		}
+
+		SDL_FreeSurface(loadedSurface);
+	}
+	return newTexture;
 }

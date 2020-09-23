@@ -41,5 +41,11 @@
     <Image Include="Assets\right.bmp">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="Assets\Guy.PNG">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\texture.png">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>
