@@ -32,9 +32,11 @@
     <Image Include="Assets\up.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Animation.h" />
     <ClInclude Include="Code\LTexture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Animation.cpp" />
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\LTexture.cpp" />
   </ItemGroup>

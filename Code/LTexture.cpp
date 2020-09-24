@@ -6,6 +6,10 @@ LTexture::LTexture()
 	mWidth = 0;
 	mHeight = 0;
 	mRender = NULL;
+	mDefaultRect = { 0,0,0,0 };
+	mAnimationClips = nullptr;
+	currentAnimation = 0;
+	NofAnimations = 0;
 }
 
 LTexture::~LTexture()
@@ -41,9 +45,20 @@ bool LTexture::loadFrom(std::string path, SDL_Renderer* Renderer)
 		}
 		SDL_FreeSurface(loadedSurface);
 	}
+	mDefaultRect = { 0,0,mWidth,mHeight };
+
+
 	mTexture = newTexture;
 	return mTexture != NULL;
 
+}
+
+void LTexture::setTile(int w, int h)
+{
+	if (w != 0 && h != 0)//TILESHEET! 
+	{
+		mDefaultRect = { 0,0,w,h };
+	}
 }
 
 void LTexture::free()
@@ -63,15 +78,75 @@ void LTexture::setColor(Uint8 red, Uint8 green, Uint8 blue)
 	SDL_SetTextureColorMod(mTexture, red, green, blue);
 }
 
+void LTexture::setBlendMode(SDL_BlendMode blending)
+{
+	SDL_SetTextureBlendMode(mTexture, blending);
+}
+
+void LTexture::setAlpha(Uint8 alpha)
+{
+	SDL_SetTextureAlphaMod(mTexture, alpha);
+}
+
 void LTexture::render(int x, int y, SDL_Rect * clip)
 {
-	SDL_Rect renderQuad = { x,y,mWidth,mHeight };
+	SDL_Rect renderQuad = { x,y,mDefaultRect.w,mDefaultRect.h };
+	SDL_Rect TilesetFrame;
 	if (clip != NULL)
 	{
 		renderQuad.w = clip->w;
 		renderQuad.h = clip->h;
+		TilesetFrame = *clip;
 	}
-	SDL_RenderCopy(mRender, mTexture, clip, &renderQuad);
+	else
+	{
+		TilesetFrame = *mAnimationClips[currentAnimation]->AnimationExecution();
+	}
+	SDL_RenderCopy(mRender, mTexture, &TilesetFrame, &renderQuad);
+}
+
+
+void LTexture::PlayAnimation()
+{
+	mAnimationClips[currentAnimation]->Play();
+}
+
+void LTexture::StopAnimation()
+{
+	mAnimationClips[currentAnimation]->Stop();
+
+}
+
+void LTexture::SwitchAnimation()
+{
+	StopAnimation();
+	currentAnimation = (currentAnimation + 1) % NofAnimations;
+	PlayAnimation();
+
+}
+
+void LTexture::AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY)
+{
+	if (mAnimationClips == nullptr)
+	{
+		
+		mAnimationClips = (Animation**)malloc(sizeof(Animation**));
+		mAnimationClips[0] = new Animation();
+		mAnimationClips[0]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, mDefaultRect.w, mDefaultRect.h);
+		
+	}
+	else
+	{
+		Animation** anims = (Animation**)malloc((NofAnimations+1) * sizeof(Animation*));
+		for (int i = 0; i < NofAnimations; i++)
+		{
+			anims[i] = mAnimationClips[i];
+		}
+		anims[NofAnimations] = new Animation();
+		anims[NofAnimations]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, mDefaultRect.w, mDefaultRect.h);
+		mAnimationClips = anims;
+	}
+	NofAnimations++;
 }
 
 int LTexture::getWidth()
