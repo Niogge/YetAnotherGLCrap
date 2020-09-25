@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
-#include "LTexture.h"
-#include "Animation.h"
+#include "GameObject.h"
+
 
 class Game
 {
@@ -17,7 +17,7 @@ public:
 	bool LoadMedia();
 	void End();
 private:
-	LTexture* charTexture;
+	GameObject* charGO;
 	SDL_Window* Window;
 	SDL_Surface* ScreenSurface;
 	SDL_Renderer* Renderer;

@@ -37,21 +37,26 @@ void Game::Loop()
 				switch (e.key.keysym.sym)
 				{
 				case SDLK_p:
-					charTexture->PlayAnimation();
+					charGO->PlayAnimation();
 					break;
 
 				case SDLK_s:
-					charTexture->StopAnimation();
+					charGO->StopAnimation();
 					break;
 
 				case SDLK_LEFT:
-					charTexture->SwitchAnimation();
+					charGO->Move(Vector2(-1, 0));
 					break;
 
 				case SDLK_RIGHT:
 
+					charGO->Move(Vector2(1, 0));
 					break;
 
+				case SDLK_0:
+					charGO->SwitchAnimation();
+
+					break;
 				default:
 
 					break;
@@ -61,7 +66,7 @@ void Game::Loop()
 
 		SDL_RenderClear(Renderer);
 
-		charTexture->render(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+		charGO->Draw();
 
 
 		SDL_RenderPresent(Renderer);
@@ -115,7 +120,7 @@ bool Game::Init()
 					ScreenSurface = SDL_GetWindowSurface(Window);
 
 
-					charTexture = new LTexture();
+					charGO = new GameObject();
 				}
 			}
 
@@ -140,18 +145,19 @@ bool Game::LoadMedia()
 		printf("Failed to load default image!\n");
 		success = false;
 	}*/
-
-	if (!charTexture->loadFrom("Assets/Tikki.png", Renderer))
+	charGO->Init(Renderer);
+	if (!charGO->LoadTexture("Assets/Tikki.png",80,80))
 	{
 		printf("Failed to load Tikki' texture image!\n");
 		success = false;
 	}
 	else
 	{
-		charTexture->setBlendMode(SDL_BLENDMODE_BLEND);
-		charTexture->setTile(80, 80);
-		charTexture->AddAnimation(0, 1, 3, 1);
-		charTexture->AddAnimation(0, 2, 4, 2);
+
+
+		charGO->AddAnimation(0, 1, 3, 1);
+		charGO->AddAnimation(0, 2, 4, 2);
+	
 
 	}
 	return success;
@@ -163,7 +169,7 @@ void Game::End()
 	ScreenSurface = NULL;
 
 	//free texture
-	charTexture->free();
+	charGO->Destroy();
 	//gBackgroundTexture->free();
 
 	SDL_DestroyRenderer(Renderer);

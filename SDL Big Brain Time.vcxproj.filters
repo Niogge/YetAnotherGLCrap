@@ -62,6 +62,12 @@
     <ClInclude Include="Code\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\CoreEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\LTexture.cpp">
@@ -74,6 +80,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\CoreEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

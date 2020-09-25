@@ -3,7 +3,6 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_Image.h>
-#include "Animation.h"
 
 class LTexture
 {
@@ -16,22 +15,14 @@ public:
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);
 	void setBlendMode(SDL_BlendMode blending);
 	void setAlpha(Uint8 alpha);
-	void render(int x, int y, SDL_Rect* clip = NULL);
-	void PlayAnimation();
-	void StopAnimation();
-	void SwitchAnimation();
-	void AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY);
+	void render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad);
 	int getWidth();
 	int getHeight();
 private:
 	SDL_Texture* mTexture;
-	SDL_Renderer* mRender;
-	Animation** mAnimationClips;
-	int currentAnimation;
-	int NofAnimations;
 	int mWidth;
 	int mHeight;
-
+	SDL_Renderer* mRender;
 
 	SDL_Rect mDefaultRect;
 };
