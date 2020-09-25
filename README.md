@@ -6,10 +6,10 @@ Features:
 - Texture Load
 - Tileset Animations
 - Game Class
+- GameObject class
 
 Next steps:
 - THE FUCKING DELTATIME. GOD.
-- GameObject class
 - GFXManager for faster handling of the pngs
 - Update Manager (still needs to be designed, but it is for gameobject that needs update)
 - Input Manager 
