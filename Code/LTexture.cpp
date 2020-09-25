@@ -7,7 +7,7 @@ LTexture::LTexture()
 	mHeight = 0;
 	mRender = NULL;
 	mDefaultRect = { 0,0,0,0 };
-	mAnimationClips = nullptr;
+	mAnimationClips = NULL;
 	currentAnimation = 0;
 	NofAnimations = 0;
 }
@@ -127,25 +127,10 @@ void LTexture::SwitchAnimation()
 
 void LTexture::AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY)
 {
-	if (mAnimationClips == nullptr)
-	{
-		
-		mAnimationClips = (Animation**)malloc(sizeof(Animation**));
-		mAnimationClips[0] = new Animation();
-		mAnimationClips[0]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, mDefaultRect.w, mDefaultRect.h);
-		
-	}
-	else
-	{
-		Animation** anims = (Animation**)malloc((NofAnimations+1) * sizeof(Animation*));
-		for (int i = 0; i < NofAnimations; i++)
-		{
-			anims[i] = mAnimationClips[i];
-		}
-		anims[NofAnimations] = new Animation();
-		anims[NofAnimations]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, mDefaultRect.w, mDefaultRect.h);
-		mAnimationClips = anims;
-	}
+	mAnimationClips = (Animation**)realloc(mAnimationClips, (NofAnimations + 1) * (sizeof(Animation*)));
+	mAnimationClips[NofAnimations] = new Animation();
+	mAnimationClips[NofAnimations]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, mDefaultRect.w, mDefaultRect.h);
+
 	NofAnimations++;
 }
 
