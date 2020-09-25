@@ -3,9 +3,9 @@ Nothing much.
 Was bored (and a bit in anxiety from not coding anything in particular) so I opened VS2019, included SDL2 and started coding. 
 
 Features:
--Texture load
--Tileset animation
--Game class
+- Texture Load
+- Tileset Animations
+- Game Class
 
 Next steps:
 - THE FUCKING DELTATIME. GOD.
