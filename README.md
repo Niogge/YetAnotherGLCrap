@@ -7,11 +7,12 @@ Features:
 - Tileset Animations
 - Game Class
 - GameObject class
+- Update Manager
+- Draw Manager
 
 Next steps:
 - THE FUCKING DELTATIME. GOD.
 - GFXManager for faster handling of the pngs
-- Update Manager (still needs to be designed, but it is for gameobject that needs update)
 - Input Manager 
 - Basic physics
 
