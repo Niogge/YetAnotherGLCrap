@@ -66,6 +66,8 @@ void Game::Loop()
 
 		SDL_RenderClear(Renderer);
 
+		charGO->Update();
+
 		charGO->Draw();
 
 
@@ -103,6 +105,7 @@ bool Game::Init()
 			}
 			else
 			{
+				UpdateMgr::Init();
 
 				//init Render Color
 				SDL_SetRenderDrawColor(Renderer, 0x8A, 0x8A, 0x8A, 0xFF);
@@ -121,6 +124,7 @@ bool Game::Init()
 
 
 					charGO = new GameObject();
+					charGO->Init(Renderer);
 				}
 			}
 
@@ -145,7 +149,7 @@ bool Game::LoadMedia()
 		printf("Failed to load default image!\n");
 		success = false;
 	}*/
-	charGO->Init(Renderer);
+	
 	if (!charGO->LoadTexture("Assets/Tikki.png",80,80))
 	{
 		printf("Failed to load Tikki' texture image!\n");

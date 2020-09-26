@@ -65,7 +65,13 @@
     <ClInclude Include="Code\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\CoreEngine.h">
+    <ClInclude Include="Code\UpdateMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\CoreInclude.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -82,10 +88,13 @@
     <ClCompile Include="Code\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\CoreEngine.cpp">
+    <ClCompile Include="Code\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GameObject.cpp">
+    <ClCompile Include="Code\UpdateMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,20 +11,23 @@ GameObject::GameObject()
 	NofAnimations = 0;
 	tileWidth =0;
 	tileHeight=0 ;
+
 }
 
 GameObject::~GameObject()
 {
-
+	Destroy();
 }
 
 void GameObject::Init(SDL_Renderer* Renderer)
 {
 	mRender = Renderer;
+	UpdateMgr::Register(this );
 }
 
 void GameObject::Update()
 {
+	mAnimationClips[currentAnimation]->AnimationExecution();
 }
 
 void GameObject::Draw()
@@ -33,7 +36,7 @@ void GameObject::Draw()
 	SDL_Rect TilesetFrame;
 
 
-	TilesetFrame = *mAnimationClips[currentAnimation]->AnimationExecution();
+	TilesetFrame = *mAnimationClips[currentAnimation]->GetFrame();
 
 	texture->render(&TilesetFrame, &renderQuad);
 }
@@ -93,6 +96,7 @@ bool GameObject::LoadTexture(std::string path, int TileWidth, int TileHeight)
 
 void GameObject::Destroy()
 {
+	UpdateMgr::Remove(this);
 	mRender = NULL;
 	texture->free();
 }

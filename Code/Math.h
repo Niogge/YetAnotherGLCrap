@@ -1,5 +1,6 @@
 #pragma once
-#include <cmath>
+#ifndef MATH_H
+#include<cmath>
 
 struct Vector2
 {
@@ -14,3 +15,4 @@ public:
 	static float DotProduct(Vector2 A, Vector2 B);
 
 };
+#endif // !MATH_H

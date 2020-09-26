@@ -1,13 +1,11 @@
 #pragma once
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
-#include <string>
-#include <iostream>
-#include "CoreEngine.h"
-#include "LTexture.h"
-#include "Animation.h"
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+#include "CoreInclude.h"
 
+
+class LTexture;
+class Animation;
 
 class GameObject
 {
@@ -36,4 +34,7 @@ private:
 	int NofAnimations;
 	int tileWidth;
 	int tileHeight;
+
 };
+
+#endif // !GAMEOBJECT_H

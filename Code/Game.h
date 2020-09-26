@@ -1,11 +1,8 @@
 #pragma once
-#include <SDL.h>
-#include <SDL_image.h>
-#include <stdio.h>
-#include <string>
-#include <iostream>
-#include "GameObject.h"
+#ifndef  GAME_H
+#define GAME_H
 
+#include "CoreInclude.h"
 
 class Game
 {
@@ -26,3 +23,4 @@ private:
 	std::string WindowName;
 
 };
+#endif // ! GAME_H

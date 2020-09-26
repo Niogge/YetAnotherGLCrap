@@ -1,8 +1,9 @@
 #pragma once
-#include <stdio.h>
-#include <string>
-#include <SDL.h>
-#include <SDL_Image.h>
+#ifndef TEXTURE_H
+#define TEXTURE_H
+
+#include "CoreInclude.h"
+
 
 class LTexture
 {
@@ -26,3 +27,4 @@ private:
 
 	SDL_Rect mDefaultRect;
 };
+#endif // !TEXTURE_H

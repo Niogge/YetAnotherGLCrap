@@ -1,8 +1,9 @@
 #pragma once
-#include <stdio.h>
-#include <string>
-#include <SDL.h>
-#include <SDL_Image.h>
+#ifndef Animation_H
+#define Animation_H
+
+
+#include "CoreInclude.h"
 
 
 class Animation
@@ -11,7 +12,8 @@ public:
 	Animation();
 	~Animation();
 	void SetAnimationClip(int startTileX, int startTileY, int EndTileX, int EndTileY, int tileW, int tileH);
-	SDL_Rect* AnimationExecution();
+	void AnimationExecution();
+	SDL_Rect* GetFrame();
 	void Play();
 	void Stop();
 	bool IsPlaying;
@@ -21,3 +23,5 @@ private:
 	SDL_Rect* frames;
 	int currentFrame;
 };
+
+#endif // !Animation_H

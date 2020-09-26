@@ -33,20 +33,22 @@ void Animation::SetAnimationClip(int startTileX, int startTileY, int EndTileX, i
 	}
 }
 
-SDL_Rect* Animation::AnimationExecution()
+void Animation::AnimationExecution()
 {
-	SDL_Rect* toreturn = nullptr;
-	
 	if (frames != nullptr)
 	{
 
-		toreturn = frames + currentFrame;
 		if (IsPlaying)
 		{
 			currentFrame = (currentFrame + 1) % clipLength;
 		}
 	}
-	return toreturn;
+	
+}
+
+SDL_Rect* Animation::GetFrame()
+{
+	return frames + currentFrame;
 }
 
 void Animation::Play()
