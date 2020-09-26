@@ -34,6 +34,7 @@
   <ItemGroup>
     <ClInclude Include="Code\Animation.h" />
     <ClInclude Include="Code\CoreInclude.h" />
+    <ClInclude Include="Code\DrawMgr.h" />
     <ClInclude Include="Code\Game.h" />
     <ClInclude Include="Code\GameObject.h" />
     <ClInclude Include="Code\LTexture.h" />
@@ -42,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Animation.cpp" />
+    <ClCompile Include="Code\DrawMgr.cpp" />
     <ClCompile Include="Code\Game.cpp" />
     <ClCompile Include="Code\GameObject.cpp" />
     <ClCompile Include="Code\Main.cpp" />

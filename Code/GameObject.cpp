@@ -23,6 +23,7 @@ void GameObject::Init(SDL_Renderer* Renderer)
 {
 	mRender = Renderer;
 	UpdateMgr::Register(this );
+	DrawMgr::Register(this);
 }
 
 void GameObject::Update()
@@ -97,6 +98,7 @@ bool GameObject::LoadTexture(std::string path, int TileWidth, int TileHeight)
 void GameObject::Destroy()
 {
 	UpdateMgr::Remove(this);
+	DrawMgr::Remove(this);
 	mRender = NULL;
 	texture->free();
 }

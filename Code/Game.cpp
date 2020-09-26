@@ -66,9 +66,10 @@ void Game::Loop()
 
 		SDL_RenderClear(Renderer);
 
-		charGO->Update();
 
-		charGO->Draw();
+
+		UpdateMgr::Update();
+		DrawMgr::Draw();
 
 
 		SDL_RenderPresent(Renderer);
@@ -106,7 +107,7 @@ bool Game::Init()
 			else
 			{
 				UpdateMgr::Init();
-
+				DrawMgr::Init();
 				//init Render Color
 				SDL_SetRenderDrawColor(Renderer, 0x8A, 0x8A, 0x8A, 0xFF);
 

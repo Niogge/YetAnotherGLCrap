@@ -11,6 +11,7 @@
 #include "Math.h"
 #include "GameObject.h"
 #include "UpdateMgr.h"
+#include "DrawMgr.h"
 #include "LTexture.h"
 #include "Animation.h"
 #include "Game.h"

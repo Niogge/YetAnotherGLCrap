@@ -74,6 +74,9 @@
     <ClInclude Include="Code\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\DrawMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\LTexture.cpp">
@@ -95,6 +98,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\DrawMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
