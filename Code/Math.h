@@ -14,5 +14,7 @@ public:
 	Vector2 Normalized();
 	static float DotProduct(Vector2 A, Vector2 B);
 
+	Vector2 operator* (float B);
+
 };
 #endif // !MATH_H

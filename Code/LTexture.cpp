@@ -7,6 +7,8 @@ LTexture::LTexture()
 	mHeight = 0;
 	mDefaultRect = { 0,0,0,0 };
 	mRender = (SDL_Renderer*)malloc(sizeof(SDL_Renderer*));
+	flipX = false;
+	flipY = false;
 }
 
 
@@ -90,7 +92,17 @@ void LTexture::setAlpha(Uint8 alpha)
 void LTexture::render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad)
 {
 	
-	SDL_RenderCopy(mRender, mTexture, TilesetFrame, renderQuad);
+	SDL_RendererFlip flipType;
+	if (flipX)
+	{
+		flipType = SDL_FLIP_HORIZONTAL;
+	}
+	else
+	{
+		flipType = SDL_FLIP_NONE;
+	}
+
+	SDL_RenderCopyEx(mRender, mTexture, TilesetFrame, renderQuad,0,NULL,flipType);
 }
 
 int LTexture::getWidth()

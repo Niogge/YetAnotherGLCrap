@@ -19,6 +19,8 @@ public:
 	void render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad);
 	int getWidth();
 	int getHeight();
+	bool flipX;
+	bool flipY;
 private:
 	SDL_Texture* mTexture;
 	int mWidth;

@@ -11,6 +11,8 @@ Animation::Animation()
 	int currentFrame = 0;
 	bool IsPlaying = false;
 	frames = nullptr;
+	CurrFrameTime = 0.;
+	SecondsPerFrame = 0.;
 }
 
 Animation::~Animation()
@@ -18,7 +20,7 @@ Animation::~Animation()
 	//KEK
 }
 
-void Animation::SetAnimationClip(int startTileX, int startTileY, int EndTileX, int EndTileY, int tileW, int tileH)
+void Animation::SetAnimationClip(int startTileX, int startTileY, int EndTileX, int EndTileY, int tileW, int tileH, int FramesPerSecond)
 {
 	clipLength = ((EndTileX - startTileX + 1) * (EndTileY - startTileY + 1));
 	frames = (SDL_Rect*)malloc(clipLength * sizeof(SDL_Rect));
@@ -31,6 +33,7 @@ void Animation::SetAnimationClip(int startTileX, int startTileY, int EndTileX, i
 			currTile++;
 		}
 	}
+	SecondsPerFrame = 1. / FramesPerSecond;
 }
 
 void Animation::AnimationExecution()
@@ -40,7 +43,12 @@ void Animation::AnimationExecution()
 
 		if (IsPlaying)
 		{
-			currentFrame = (currentFrame + 1) % clipLength;
+			CurrFrameTime += Time::GetDeltaTime();
+			if (CurrFrameTime >= SecondsPerFrame)
+			{
+				CurrFrameTime = 0.;
+				currentFrame = (currentFrame + 1) % clipLength;
+			}
 		}
 	}
 	
@@ -55,10 +63,12 @@ void Animation::Play()
 {
 	IsPlaying = true;
 	currentFrame = 0;
+	CurrFrameTime = 0.;
 }
 
 void Animation::Stop()
 {
 	IsPlaying = false;
 	currentFrame = 0;
+	CurrFrameTime = 0.;
 }

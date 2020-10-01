@@ -39,6 +39,7 @@
     <ClInclude Include="Code\GameObject.h" />
     <ClInclude Include="Code\LTexture.h" />
     <ClInclude Include="Code\Math.h" />
+    <ClInclude Include="Code\Time.h" />
     <ClInclude Include="Code\UpdateMgr.h" />
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +50,7 @@
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\LTexture.cpp" />
     <ClCompile Include="Code\Math.cpp" />
+    <ClCompile Include="Code\Time.cpp" />
     <ClCompile Include="Code\UpdateMgr.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

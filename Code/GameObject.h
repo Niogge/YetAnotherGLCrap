@@ -18,7 +18,7 @@ public:
 	void PlayAnimation();
 	void StopAnimation();
 	void SwitchAnimation();
-	void AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY);
+	void AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY,int FramesPerSecond);
 	bool LoadTexture(std::string path);
 	bool LoadTexture(std::string path, int TileWidth, int TileHeight);
 	void Destroy();

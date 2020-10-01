@@ -36,3 +36,8 @@ float Vector2::DotProduct(Vector2 A, Vector2 B)
 {
     return (A.x * B.x + A.y * B.y);
 }
+
+Vector2 Vector2::operator*(float B)
+{
+    return Vector2(this->x *B, this->y *B);
+}

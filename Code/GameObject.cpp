@@ -62,11 +62,11 @@ void GameObject::SwitchAnimation()
 
 }
 
-void GameObject::AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY)
+void GameObject::AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY, int FramesPerSecond)
 {
 	mAnimationClips = (Animation**)realloc(mAnimationClips, (NofAnimations + 1) * (sizeof(Animation*)));
 	mAnimationClips[NofAnimations] = new Animation();
-	mAnimationClips[NofAnimations]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, tileWidth, tileHeight);
+	mAnimationClips[NofAnimations]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, tileWidth, tileHeight, FramesPerSecond);
 
 	NofAnimations++;
 }
@@ -105,5 +105,14 @@ void GameObject::Destroy()
 
 void GameObject::Move(Vector2 dir)
 {
+	if (dir.x < 0)
+	{
+		texture->flipX  = true;
+	}
+	else
+	{
+		texture->flipX = false;
+	}
 	position = Vector2(position.x + dir.x, position.y + dir.y);
+	//std::cout << position.x << std::endl;
 }

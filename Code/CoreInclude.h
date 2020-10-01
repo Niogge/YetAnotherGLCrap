@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include "Math.h"
+#include "Time.h"
 #include "GameObject.h"
 #include "UpdateMgr.h"
 #include "DrawMgr.h"

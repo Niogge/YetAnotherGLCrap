@@ -11,7 +11,7 @@ class Animation
 public:
 	Animation();
 	~Animation();
-	void SetAnimationClip(int startTileX, int startTileY, int EndTileX, int EndTileY, int tileW, int tileH);
+	void SetAnimationClip(int startTileX, int startTileY, int EndTileX, int EndTileY, int tileW, int tileH, int FramesPerSecond);
 	void AnimationExecution();
 	SDL_Rect* GetFrame();
 	void Play();
@@ -22,6 +22,9 @@ private:
 	int clipLength;
 	SDL_Rect* frames;
 	int currentFrame;
+	float SecondsPerFrame;
+	float CurrFrameTime;
+
 };
 
 #endif // !Animation_H

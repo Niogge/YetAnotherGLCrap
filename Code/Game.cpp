@@ -45,12 +45,12 @@ void Game::Loop()
 					break;
 
 				case SDLK_LEFT:
-					charGO->Move(Vector2(-1, 0));
+					charGO->Move(Vector2(-1, 0)*50.*Time::GetDeltaTime());
 					break;
 
 				case SDLK_RIGHT:
 
-					charGO->Move(Vector2(1, 0));
+					charGO->Move(Vector2(1, 0) * 50. * Time::GetDeltaTime());
 					break;
 
 				case SDLK_0:
@@ -66,6 +66,7 @@ void Game::Loop()
 
 		SDL_RenderClear(Renderer);
 
+		Time::Tick();
 
 
 		UpdateMgr::Update();
@@ -74,7 +75,7 @@ void Game::Loop()
 
 		SDL_RenderPresent(Renderer);
 
-		SDL_Delay(200);
+		SDL_Delay(16);
 	}
 }
 
@@ -108,6 +109,8 @@ bool Game::Init()
 			{
 				UpdateMgr::Init();
 				DrawMgr::Init();
+				Time::Init();
+
 				//init Render Color
 				SDL_SetRenderDrawColor(Renderer, 0x8A, 0x8A, 0x8A, 0xFF);
 
@@ -160,8 +163,8 @@ bool Game::LoadMedia()
 	{
 
 
-		charGO->AddAnimation(0, 1, 3, 1);
-		charGO->AddAnimation(0, 2, 4, 2);
+		charGO->AddAnimation(0, 1, 3, 1,4);
+		charGO->AddAnimation(0, 2, 4, 2,4);
 	
 
 	}
