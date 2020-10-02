@@ -9,9 +9,9 @@ Features:
 - GameObject class
 - Update Manager
 - Draw Manager
+- DeltaTime and timing in general
 
 Next steps:
-- THE FUCKING DELTATIME. GOD.
 - GFXManager for faster handling of the pngs
 - Input Manager 
 - Basic physics
