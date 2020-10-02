@@ -21,6 +21,8 @@ Will code someday:
 - Scene manager
 - Sfx manager 
 - Something i'm way too tired to acknowledge now. 
+<br>
+<hr/>
 
  #### UpdateMgr and DrawMgr Update 02/10/2020 ####
 
