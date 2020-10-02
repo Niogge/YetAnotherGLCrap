@@ -7,8 +7,8 @@ Features:
 - Tileset Animations
 - Game Class
 - GameObject class
-- Update Manager
-- Draw Manager
+- Update Manager (multi layer)
+- Draw Manager (multi layer)
 - DeltaTime and timing in general
 - GFX Manager
 
