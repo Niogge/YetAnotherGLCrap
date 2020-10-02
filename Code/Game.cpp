@@ -115,6 +115,7 @@ bool Game::Init()
 			{
 				//Remember? friend class! :D 
 				UpdateMgr::Init();
+				GFXMgr::Init();
 				DrawMgr::Init();
 				Time::Init();
 

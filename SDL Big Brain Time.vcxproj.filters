@@ -50,6 +50,9 @@
     <ClInclude Include="Code\Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\GFXMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\LTexture.cpp">
@@ -77,6 +80,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\GFXMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

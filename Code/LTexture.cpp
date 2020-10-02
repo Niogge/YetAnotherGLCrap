@@ -31,7 +31,7 @@ bool LTexture::loadFrom(std::string path, SDL_Renderer* Renderer)
 
 
 	SDL_Texture* newTexture = NULL;
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	SDL_Surface* loadedSurface =GFXMgr::GetImage("Tikki");
 	mRender = Renderer;
 	if (loadedSurface == NULL)
 	{
