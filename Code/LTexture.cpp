@@ -21,6 +21,15 @@ LTexture::~LTexture()
 bool LTexture::loadFrom(std::string path, SDL_Renderer* Renderer)
 {
 	free();
+
+	//This is some wrapping for basic SDL functions, i'm not going to comment this in depth
+	//Just remember that the basic logic is:
+	// assign the result of a function to a pointer
+	//check if the pointer is null
+	// if true: Error
+	// if false: Go on.
+
+
 	SDL_Texture* newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	mRender = Renderer;

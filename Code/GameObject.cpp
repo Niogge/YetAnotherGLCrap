@@ -22,7 +22,7 @@ GameObject::~GameObject()
 void GameObject::Init(SDL_Renderer* Renderer)
 {
 	mRender = Renderer;
-	UpdateMgr::Register(this );
+	UpdateMgr::Register(this ); //Register the gameobject to the various managers
 	DrawMgr::Register(this);
 }
 
@@ -33,13 +33,13 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
-	SDL_Rect renderQuad = { position.x ,position.y ,tileWidth,tileHeight };
-	SDL_Rect TilesetFrame;
+	SDL_Rect renderQuad = { position.x ,position.y ,tileWidth,tileHeight }; //This is the quad where it will be rendered
+	SDL_Rect TilesetFrame; //This is the frame on the tileset that will be rendered
 
 
-	TilesetFrame = *mAnimationClips[currentAnimation]->GetFrame();
+	TilesetFrame = *mAnimationClips[currentAnimation]->GetFrame(); //get that frame from the animation
 
-	texture->render(&TilesetFrame, &renderQuad);
+	texture->render(&TilesetFrame, &renderQuad);  //and render it.
 }
 
 void GameObject::PlayAnimation()
@@ -64,6 +64,10 @@ void GameObject::SwitchAnimation()
 
 void GameObject::AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY, int FramesPerSecond)
 {
+	//OK SO. if i have to make an array of classes, i just need an array of pointers to that class.
+	// IF i need to make this array dynamic, then the whole stuff is a pointer to class pointers
+	//--->  Animation**, i have a dynamic array of pointers to animations 
+
 	mAnimationClips = (Animation**)realloc(mAnimationClips, (NofAnimations + 1) * (sizeof(Animation*)));
 	mAnimationClips[NofAnimations] = new Animation();
 	mAnimationClips[NofAnimations]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, tileWidth, tileHeight, FramesPerSecond);

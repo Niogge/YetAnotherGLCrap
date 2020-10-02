@@ -8,7 +8,7 @@ Game::Game(int W, int H, std::string Name)
 
 	Window = NULL;
 	ScreenSurface = NULL;
-	Renderer= NULL;
+	Renderer = NULL;
 }
 
 Game::~Game()
@@ -45,7 +45,7 @@ void Game::Loop()
 					break;
 
 				case SDLK_LEFT:
-					charGO->Move(Vector2(-1, 0)*50.*Time::GetDeltaTime());
+					charGO->Move(Vector2(-1, 0) * 50. * Time::GetDeltaTime());
 					break;
 
 				case SDLK_RIGHT:
@@ -82,6 +82,12 @@ void Game::Loop()
 bool Game::Init()
 {
 	bool success = true;
+	// The basic logic is:
+	// assign the result of a function to a pointer
+	// check if the pointer is null
+	// if true: Error
+	// if false: Go on.
+
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -107,6 +113,7 @@ bool Game::Init()
 			}
 			else
 			{
+				//Remember? friend class! :D 
 				UpdateMgr::Init();
 				DrawMgr::Init();
 				Time::Init();
@@ -153,8 +160,8 @@ bool Game::LoadMedia()
 		printf("Failed to load default image!\n");
 		success = false;
 	}*/
-	
-	if (!charGO->LoadTexture("Assets/Tikki.png",80,80))
+
+	if (!charGO->LoadTexture("Assets/Tikki.png", 80, 80))
 	{
 		printf("Failed to load Tikki' texture image!\n");
 		success = false;
@@ -163,9 +170,9 @@ bool Game::LoadMedia()
 	{
 
 
-		charGO->AddAnimation(0, 1, 3, 1,4);
-		charGO->AddAnimation(0, 2, 4, 2,4);
-	
+		charGO->AddAnimation(0, 1, 3, 1, 4);
+		charGO->AddAnimation(0, 2, 4, 2, 4);
+
 
 	}
 	return success;

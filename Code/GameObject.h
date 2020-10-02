@@ -2,7 +2,10 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 #include "CoreInclude.h"
+/*
+Ok so, this is clearly missing a lot of features (like component stuff and some "get" functions)
 
+*/
 
 class LTexture;
 class Animation;

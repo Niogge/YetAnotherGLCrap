@@ -19,17 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\background.png" />
-    <Image Include="Assets\foo.png" />
-    <Image Include="Assets\Guy.PNG" />
-    <Image Include="Assets\down.bmp" />
-    <Image Include="Assets\hello.bmp" />
-    <Image Include="Assets\left.bmp" />
-    <Image Include="Assets\press.bmp" />
-    <Image Include="Assets\right.bmp" />
-    <Image Include="Assets\texture.png" />
     <Image Include="Assets\Tikki.png" />
-    <Image Include="Assets\up.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Animation.h" />

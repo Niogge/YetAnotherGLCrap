@@ -22,6 +22,7 @@ Animation::~Animation()
 
 void Animation::SetAnimationClip(int startTileX, int startTileY, int EndTileX, int EndTileY, int tileW, int tileH, int FramesPerSecond)
 {
+	//There was no need to use a malloc here, but whatever.
 	clipLength = ((EndTileX - startTileX + 1) * (EndTileY - startTileY + 1));
 	frames = (SDL_Rect*)malloc(clipLength * sizeof(SDL_Rect));
 	int currTile = 0;
