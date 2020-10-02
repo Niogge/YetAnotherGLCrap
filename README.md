@@ -22,8 +22,8 @@ Will code someday:
 - Sfx manager 
 - Something i'm way too tired to acknowledge now. 
 
- UpdateMgr and DrawMgr Update 02/10/2020 
- ---------------
+ #### UpdateMgr and DrawMgr Update 02/10/2020 ####
+
 So, I have decided that I needed more control over when something is updated and something is drawn, so it was time to add some layers.
 The update list was:  GameObject** UpdateList:
 Now it's a bit more complex: std::map<int8_t, GameObject**> UpdateList;
