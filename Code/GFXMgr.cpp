@@ -1,7 +1,7 @@
 #include "GFXMgr.h"
 
 
-std::map<std::string, SDL_Surface*> LoadedTextures;
+static std::map<std::string, SDL_Surface*> LoadedTextures;
 
 SDL_Surface* GFXMgr::GetImage(std::string TextureName)
 {

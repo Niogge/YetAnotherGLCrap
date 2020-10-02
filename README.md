@@ -10,9 +10,10 @@ Features:
 - Update Manager
 - Draw Manager
 - DeltaTime and timing in general
+- GFX Manager
+
 
 Next steps:
-- GFXManager for faster handling of the pngs
 - Input Manager 
 - Basic physics
 
