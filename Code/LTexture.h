@@ -10,7 +10,7 @@ class LTexture
 public:
 	LTexture();
 	~LTexture();
-	bool loadFrom(std::string path, SDL_Renderer* Renderer);
+	bool loadFrom(std::string Name, SDL_Renderer* Renderer);
 	void setTile(int w,int h);
 	void free();
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);

@@ -22,9 +22,13 @@ public:
 	void StopAnimation();
 	void SwitchAnimation();
 	void AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY,int FramesPerSecond);
-	bool LoadTexture(std::string path);
-	bool LoadTexture(std::string path, int TileWidth, int TileHeight);
+	bool LoadTexture(std::string TextureName);
+	bool LoadTexture(std::string TextureName, int TileWidth, int TileHeight);
+	bool isActive();
+	bool SetActive(bool activeState);
 	void Destroy();
+	void UpdateLayer(int8_t layer);
+	void DrawLayer(int8_t layer);
 	//REMOVE THIS:
 	void Move(Vector2 dir);
 private:
@@ -37,7 +41,7 @@ private:
 	int NofAnimations;
 	int tileWidth;
 	int tileHeight;
-
+	bool active;
 };
 
 #endif // !GAMEOBJECT_H

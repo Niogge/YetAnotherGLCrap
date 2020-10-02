@@ -2,47 +2,83 @@
 
 
 
-static int ListLength;
-static GameObject** DrawList;
-
+static std::map<int8_t, int> ListLength;
+static std::map<int8_t, GameObject**> DrawList;
 void DrawMgr::Init()
 {
-	DrawList = nullptr;
-	ListLength = 0;
 }
 
-void DrawMgr::Register(GameObject* Go)
+void DrawMgr::Register(GameObject* Go, int8_t layer)
 {
-	DrawList = (GameObject**)realloc(DrawList, (ListLength + 1) * sizeof(GameObject*));
-	DrawList[ListLength] = Go;
-	ListLength++;
+	DrawList[layer] = (GameObject**)realloc(DrawList[layer], (ListLength[layer] + 1) * sizeof(GameObject*));
+	DrawList[layer][ListLength[layer]] = Go;
+	ListLength[layer]++;
 }
 
 void DrawMgr::Remove(GameObject* Go)
 {
-	GameObject** f;
-	f = (GameObject**)malloc((ListLength - 1) * sizeof(GameObject*));
-	int j = 0;
-	for (int i = 0; i < ListLength; i++)
+	int8_t layerToUpdate;
+	bool found = false;
+	for (int8_t layer = -128; layer < 127; layer++)
 	{
-		if (DrawList[i] == Go)
+
+		if (ListLength[layer] == 0)
 		{
 			continue;
 		}
-		else
+		for (int i = 0; i < ListLength[layer]; i++)
 		{
-			f[j] = DrawList[i];
-			j++;
+			if (DrawList[layer][i] == Go)
+			{
+				//this is the layer
+				found = true;
+				layerToUpdate = layer;
+				break;
+			}
+		}
+		if (found)
+		{
+			break;
 		}
 	}
-	DrawList = f;
-	ListLength--;
+	if (found)
+	{
+
+
+		GameObject** f;
+		f = (GameObject**)malloc((ListLength[layerToUpdate] - 1) * sizeof(GameObject*));
+		int j = 0;
+		for (int i = 0; i < ListLength[layerToUpdate]; i++)
+		{
+			if (DrawList[layerToUpdate][i] == Go)
+			{
+				continue;
+			}
+			else
+			{
+				f[j] = DrawList[layerToUpdate][i];
+				j++;
+			}
+		}
+		DrawList[layerToUpdate] = f;
+		ListLength[layerToUpdate]--;
+	}
+
 }
 
 void DrawMgr::Draw()
 {
-	for (int i = 0; i < ListLength; i++)
+	for (int8_t layer = -128; layer < 127; layer++)
 	{
-		DrawList[i]->Draw();
+		if (ListLength[layer] != 0)
+		{
+			for (int i = 0; i < ListLength[layer]; i++)
+			{
+				if (DrawList[layer][i]->isActive())
+				{
+					DrawList[layer][i]->Draw();
+				}
+			}
+		}
 	}
 }

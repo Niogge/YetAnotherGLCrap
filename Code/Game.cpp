@@ -1,5 +1,8 @@
 #include "Game.h"
 
+GameObject* charGO;
+GameObject* Background;
+
 Game::Game(int W, int H, std::string Name)
 {
 	SCREEN_WIDTH = W;
@@ -54,7 +57,13 @@ void Game::Loop()
 					break;
 
 				case SDLK_0:
-					charGO->SwitchAnimation();
+					charGO->DrawLayer(-1);
+					Background->DrawLayer(0);
+
+					break;
+				case SDLK_9:
+					charGO->DrawLayer(0);
+					Background->DrawLayer(-1);
 
 					break;
 				default:
@@ -137,6 +146,12 @@ bool Game::Init()
 
 					charGO = new GameObject();
 					charGO->Init(Renderer);
+					charGO->UpdateLayer(2);
+					charGO->DrawLayer(2);
+
+					Background = new GameObject();
+					Background->Init(Renderer);
+					Background->DrawLayer(-128);
 				}
 			}
 
@@ -162,7 +177,7 @@ bool Game::LoadMedia()
 		success = false;
 	}*/
 
-	if (!charGO->LoadTexture("Assets/Tikki.png", 80, 80))
+	if (!charGO->LoadTexture("Tikki", 80, 80))
 	{
 		printf("Failed to load Tikki' texture image!\n");
 		success = false;
@@ -175,6 +190,11 @@ bool Game::LoadMedia()
 		charGO->AddAnimation(0, 2, 4, 2, 4);
 
 
+	}
+	if (!Background->LoadTexture("BG"))
+	{
+		printf("Failed to load BG texture image!\n");
+		success = false;
 	}
 	return success;
 }

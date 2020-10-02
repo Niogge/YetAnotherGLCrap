@@ -14,7 +14,6 @@ public:
 	bool LoadMedia();
 	void End();
 private:
-	GameObject* charGO;
 	SDL_Window* Window;
 	SDL_Surface* ScreenSurface;
 	SDL_Renderer* Renderer;

@@ -18,7 +18,7 @@ LTexture::~LTexture()
 	free();
 }
 
-bool LTexture::loadFrom(std::string path, SDL_Renderer* Renderer)
+bool LTexture::loadFrom(std::string Name, SDL_Renderer* Renderer)
 {
 	free();
 
@@ -31,11 +31,11 @@ bool LTexture::loadFrom(std::string path, SDL_Renderer* Renderer)
 
 
 	SDL_Texture* newTexture = NULL;
-	SDL_Surface* loadedSurface =GFXMgr::GetImage("Tikki");
+	SDL_Surface* loadedSurface =GFXMgr::GetImage(Name);
 	mRender = Renderer;
 	if (loadedSurface == NULL)
 	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+		printf("Unable to load image");
 	}
 	else
 	{
@@ -45,7 +45,7 @@ bool LTexture::loadFrom(std::string path, SDL_Renderer* Renderer)
 		newTexture = SDL_CreateTextureFromSurface(Renderer, loadedSurface);
 		if (newTexture == NULL)
 		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+			printf("Unable to create texture from %s! SDL Error: %s\n", Name.c_str(), SDL_GetError());
 		}
 		else
 		{

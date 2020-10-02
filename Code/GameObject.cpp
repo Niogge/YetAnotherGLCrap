@@ -11,7 +11,7 @@ GameObject::GameObject()
 	NofAnimations = 0;
 	tileWidth =0;
 	tileHeight=0 ;
-
+	active = true;
 }
 
 GameObject::~GameObject()
@@ -22,13 +22,17 @@ GameObject::~GameObject()
 void GameObject::Init(SDL_Renderer* Renderer)
 {
 	mRender = Renderer;
-	UpdateMgr::Register(this ); //Register the gameobject to the various managers
+	UpdateMgr::Register(this); //Register the gameobject to the various managers
 	DrawMgr::Register(this);
 }
 
 void GameObject::Update()
 {
-	mAnimationClips[currentAnimation]->AnimationExecution();
+	if (NofAnimations > 0)
+	{
+		mAnimationClips[currentAnimation]->AnimationExecution();
+
+	}
 }
 
 void GameObject::Draw()
@@ -36,8 +40,15 @@ void GameObject::Draw()
 	SDL_Rect renderQuad = { position.x ,position.y ,tileWidth,tileHeight }; //This is the quad where it will be rendered
 	SDL_Rect TilesetFrame; //This is the frame on the tileset that will be rendered
 
+	if (NofAnimations)
+	{
+		TilesetFrame = *mAnimationClips[currentAnimation]->GetFrame(); //get that frame from the animation
 
-	TilesetFrame = *mAnimationClips[currentAnimation]->GetFrame(); //get that frame from the animation
+	}
+	else
+	{
+		TilesetFrame = { (int)position.x, (int)position.y, texture->getWidth(),texture->getWidth() };
+	}
 
 	texture->render(&TilesetFrame, &renderQuad);  //and render it.
 }
@@ -75,20 +86,23 @@ void GameObject::AddAnimation(int startTileX, int startTileY, int EndTileX, int 
 	NofAnimations++;
 }
 
-bool GameObject::LoadTexture(std::string path)
+bool GameObject::LoadTexture(std::string TextureName)
 {
-	if (!texture->loadFrom(path, mRender))
+	if (!texture->loadFrom(TextureName, mRender))
 	{
 		return false;
 	}
 	texture->setBlendMode(SDL_BLENDMODE_BLEND);
+	tileWidth = texture->getWidth();
+	tileHeight = texture->getHeight();
+
 
 	return true;
 }
 
-bool GameObject::LoadTexture(std::string path, int TileWidth, int TileHeight)
+bool GameObject::LoadTexture(std::string TextureName, int TileWidth, int TileHeight)
 {
-	if (!LoadTexture(path))
+	if (!LoadTexture(TextureName))
 	{
 		return false;
 	}
@@ -99,12 +113,35 @@ bool GameObject::LoadTexture(std::string path, int TileWidth, int TileHeight)
 	return true;
 }
 
+bool GameObject::isActive()
+{
+	return active;
+}
+
+bool GameObject::SetActive(bool activeState)
+{
+	active = activeState;
+	return active;
+}
+
 void GameObject::Destroy()
 {
 	UpdateMgr::Remove(this);
 	DrawMgr::Remove(this);
 	mRender = NULL;
 	texture->free();
+}
+
+void GameObject::UpdateLayer(int8_t layer)
+{
+	UpdateMgr::Remove(this);
+	UpdateMgr::Register(this, layer);
+}
+
+void GameObject::DrawLayer(int8_t layer)
+{
+	DrawMgr::Remove(this);
+	DrawMgr::Register(this, layer);
 }
 
 void GameObject::Move(Vector2 dir)

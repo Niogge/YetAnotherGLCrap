@@ -12,7 +12,7 @@ class GameObject;
 class UpdateMgr
 {
 public:
-	static void Register(GameObject* go);
+	static void Register(GameObject* go, int8_t layer = 0);
 	static void Remove(GameObject* go);
 private:
 	friend class Game;

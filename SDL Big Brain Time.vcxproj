@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\singola.PNG" />
     <Image Include="Assets\Tikki.png" />
   </ItemGroup>
   <ItemGroup>

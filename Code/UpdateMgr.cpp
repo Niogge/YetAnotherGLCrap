@@ -1,46 +1,86 @@
 #include "UpdateMgr.h"
 
-static int ListLength;
-static GameObject** UpdateList;
+static std::map<int8_t, int> ListLength;
+static std::map<int8_t, GameObject**> UpdateList;
 
 void UpdateMgr::Init()
 {
-	UpdateList = nullptr;
-	ListLength= 0;
+
 }
 
-void UpdateMgr::Register(GameObject * Go)
+void UpdateMgr::Register(GameObject* Go, int8_t layer)
 {
-	UpdateList = (GameObject**) realloc(UpdateList, (ListLength + 1) * sizeof(GameObject*));
-	UpdateList[ListLength] = Go;
-	ListLength++;
+	int lsl = ListLength[layer];
+	UpdateList[layer] = (GameObject**)realloc(UpdateList[layer], (lsl + 1) * sizeof(GameObject*));
+	UpdateList[layer][lsl] = Go;
+	ListLength[layer]++;
 }
 
 void UpdateMgr::Remove(GameObject* Go)
 {
-	GameObject** f;
-	f = (GameObject**) malloc((ListLength - 1) * sizeof(GameObject * ));
-	int j = 0;
-	for (int i = 0; i < ListLength; i++)
+	int8_t layerToUpdate;
+	bool found = false;
+	for (int8_t layer = -128; layer < 127; layer++)
 	{
-		if (UpdateList[i] == Go)
+
+		if (ListLength[layer] == 0)
 		{
 			continue;
 		}
-		else
+		for (int i = 0; i < ListLength[layer]; i++)
 		{
-			f[j] = UpdateList[i];
-			j++;
+			if (UpdateList[layer][i] == Go)
+			{
+				//this is the layer
+				found = true;
+				layerToUpdate = layer;
+				break;
+			}
+		}
+		if (found)
+		{
+			break;
 		}
 	}
-	UpdateList = f;
-	ListLength--;
+	if (found)
+	{
+		GameObject** f;
+		f = (GameObject**)malloc((ListLength[layerToUpdate] - 1) * sizeof(GameObject*));
+		int j = 0;
+		for (int i = 0; i < ListLength[layerToUpdate]; i++)
+		{
+			if (UpdateList[layerToUpdate][i] == Go)
+			{
+				
+				continue;
+			}
+			else
+			{
+				f[j] = UpdateList[layerToUpdate][i];
+				j++;
+			}
+		}
+		UpdateList[layerToUpdate] = f;
+		ListLength[layerToUpdate]--;
+
+	}
+
 }
 
 void UpdateMgr::Update()
 {
-	for (int i = 0; i < ListLength; i++)
+	for (int8_t layer = -128; layer < 127; layer++)
 	{
-		UpdateList[i]->Update();
+		if (ListLength[layer] != 0)
+		{
+			for (int i = 0; i < ListLength[layer]; i++)
+			{
+				if (UpdateList[layer][i]->isActive())
+				{
+					UpdateList[layer][i]->Update();
+				}
+			}
+
+		}
 	}
 }

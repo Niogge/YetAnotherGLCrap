@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include <map>
+
 #include "Math.h"
 #include "Time.h"
 #include "GFXMgr.h"

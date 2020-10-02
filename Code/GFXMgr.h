@@ -2,7 +2,6 @@
 #ifndef GFXMGR_H
 #define GFXMGR_H
 #include "CoreInclude.h"
-#include <map>
 
 class GFXMgr
 {

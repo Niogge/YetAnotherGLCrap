@@ -13,7 +13,7 @@ class GameObject;
 class DrawMgr
 {
 public:
-	static void Register(GameObject* Go);
+	static void Register(GameObject* Go, int8_t layer = 0);
 	static void Remove(GameObject* Go);
 private:
 	friend class Game;

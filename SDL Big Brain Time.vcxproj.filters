@@ -21,6 +21,9 @@
     <Image Include="Assets\Tikki.png">
       <Filter>Assets</Filter>
     </Image>
+    <Image Include="Assets\singola.PNG">
+      <Filter>Assets</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\LTexture.h">

@@ -15,6 +15,7 @@ SDL_Surface* GFXMgr::GetImage(std::string TextureName)
 void GFXMgr::Init()
 {
 	AddTexture("Tikki","Assets/Tikki.png");
+	AddTexture("BG","Assets/singola.PNG");
 }
 
 bool GFXMgr::AddTexture(std::string Name,std::string path)
