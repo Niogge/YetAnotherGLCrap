@@ -27,10 +27,10 @@ Will code someday:
  #### UpdateMgr and DrawMgr Update 02/10/2020 ####
 
 So, I have decided that I needed more control over when something is updated and something is drawn, so it was time to add some layers.
-The update list was:  GameObject** UpdateList:
-Now it's a bit more complex: std::map<int8_t, GameObject**> UpdateList;
-This allows me to have 255 ordered layers (it's a lot, I know) and update them starting from layer -128 all the way up to layer 127.
+The update list was:  GameObject** UpdateList: <br>
+Now it's a bit more complex: std::map<int8_t, GameObject**> UpdateList;<br>
+This allows me to have 255 ordered layers (it's a lot, I know) and update them starting from layer -128 all the way up to layer 127.<br>
 This update needs a change also in the register and remove functions, the former is really simple, just take in account that you are working
-with a map of int8_t as key and GameObject** as value, the latter it's a bit more tricky: Find the layer where is contained the GameObject
+with a map of int8_t as key and GameObject** as value, the latter it's a bit more tricky:<br> Find the layer where is contained the GameObject
 you want to remove, then do some shady memory allocation magic and substitute the new GameObject** (you can find this procedure inside 
 UpdateMgr.cpp and DrawMgr.cpp)
