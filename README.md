@@ -27,7 +27,7 @@ Will code someday:
  #### UpdateMgr and DrawMgr Update 02/10/2020 ####
 
 So, I have decided that I needed more control over when something is updated and something is drawn, so it was time to add some layers.
-The update list was:  GameObject** UpdateList: <br>
+The update list was:  GameObject** UpdateList; <br>
 Now it's a bit more complex: std::map<int8_t, GameObject**> UpdateList;<br>
 This allows me to have 255 ordered layers (it's a lot, I know) and update them starting from layer -128 all the way up to layer 127.<br>
 This update needs a change also in the register and remove functions, the former is really simple, just take in account that you are working
