@@ -21,7 +21,10 @@
     <Image Include="Assets\Tikki.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\singola.PNG">
+    <Image Include="Assets\BackGround.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Block.png">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>

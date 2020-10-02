@@ -1,7 +1,8 @@
 #include "Game.h"
 
 GameObject* charGO;
-GameObject* Background;
+GameObject* Block1;
+GameObject* Block2;
 
 Game::Game(int W, int H, std::string Name)
 {
@@ -57,13 +58,11 @@ void Game::Loop()
 					break;
 
 				case SDLK_0:
-					charGO->DrawLayer(-1);
-					Background->DrawLayer(0);
+
 
 					break;
 				case SDLK_9:
-					charGO->DrawLayer(0);
-					Background->DrawLayer(-1);
+
 
 					break;
 				default:
@@ -124,7 +123,7 @@ bool Game::Init()
 			{
 				//Remember? friend class! :D 
 				UpdateMgr::Init();
-				GFXMgr::Init();
+				GFXMgr::Init(Renderer);
 				DrawMgr::Init();
 				Time::Init();
 
@@ -149,9 +148,15 @@ bool Game::Init()
 					charGO->UpdateLayer(2);
 					charGO->DrawLayer(2);
 
-					Background = new GameObject();
-					Background->Init(Renderer);
-					Background->DrawLayer(-128);
+					Block1 = new GameObject();
+					Block1->Init(Renderer);
+					Block1->Move(Vector2(60, 13));
+					Block1->DrawLayer(1);
+
+					Block2 = new GameObject();
+					Block2->Init(Renderer);
+					Block2->Move(Vector2(150, 13));
+					Block2->DrawLayer(3);
 				}
 			}
 
@@ -191,9 +196,14 @@ bool Game::LoadMedia()
 
 
 	}
-	if (!Background->LoadTexture("BG"))
+	if (!Block1->LoadTexture("Block"))
 	{
-		printf("Failed to load BG texture image!\n");
+		printf("Failed to load Block texture image!\n");
+		success = false;
+	}
+	if (!Block2->LoadTexture("Block"))
+	{
+		printf("Failed to load Block texture image!\n");
 		success = false;
 	}
 	return success;

@@ -7,7 +7,7 @@ and may not be redistributed without written permission.*/
 
 int main(int argc, char* args[])
 {
-	Game* newGame = new Game(640, 480, "Best Game Ever");
+	Game* newGame = new Game(600, 480, "Best Game Ever");
 	
 	if (!newGame->Init())
 	{

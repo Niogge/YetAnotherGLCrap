@@ -6,12 +6,13 @@
 class GFXMgr
 {
 public:
-	static SDL_Surface* GetImage(std::string TextureName);
+	static SDL_Texture* GetImage(std::string TextureName);
 
 private:
 	friend class Game;
-	static void Init();
+	static void Init(SDL_Renderer * renderer);
 	static bool AddTexture(std::string Name, std::string path);
+
 };
 
 

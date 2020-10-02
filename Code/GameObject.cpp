@@ -47,7 +47,7 @@ void GameObject::Draw()
 	}
 	else
 	{
-		TilesetFrame = { (int)position.x, (int)position.y, texture->getWidth(),texture->getWidth() };
+		TilesetFrame = { 0, 0, texture->getWidth(),texture->getWidth() };
 	}
 
 	texture->render(&TilesetFrame, &renderQuad);  //and render it.

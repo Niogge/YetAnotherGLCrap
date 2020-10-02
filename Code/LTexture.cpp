@@ -30,31 +30,10 @@ bool LTexture::loadFrom(std::string Name, SDL_Renderer* Renderer)
 	// if false: Go on.
 
 
-	SDL_Texture* newTexture = NULL;
-	SDL_Surface* loadedSurface =GFXMgr::GetImage(Name);
+	SDL_Texture* newTexture = GFXMgr::GetImage(Name);
 	mRender = Renderer;
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image");
-	}
-	else
-	{
-		// Color key image
-		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
-		//texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(Renderer, loadedSurface);
-		if (newTexture == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", Name.c_str(), SDL_GetError());
-		}
-		else
-		{
-			//get the d...mensions
-			mWidth = loadedSurface->w;
-			mHeight = loadedSurface->h;
-		}
-		SDL_FreeSurface(loadedSurface);
-	}
+	SDL_QueryTexture(newTexture, NULL, NULL, &mWidth, &mHeight);
+
 	mDefaultRect = { 0,0,mWidth,mHeight };
 
 
