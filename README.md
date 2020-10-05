@@ -11,14 +11,15 @@ Features:
 - Draw Manager (multi layer)
 - DeltaTime and timing in general
 - GFX Manager
-
+- Input Manager 
+- Component system
 
 Next steps:
-- Input Manager 
+- Scene manager
 - Basic physics
+- Collisions
 
 Will code someday:
-- Scene manager
 - Sfx manager 
 - Something i'm way too tired to acknowledge now. 
 <br>
