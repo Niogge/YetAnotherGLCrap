@@ -29,6 +29,10 @@ void GameObject::Init(SDL_Renderer* Renderer)
 
 
 	transform->Start();
+	for (int i = 0; i < NofComponents; i++)
+	{
+		Components[i]->Start();
+	}
 }
 
 void GameObject::Update()
@@ -39,15 +43,20 @@ void GameObject::Update()
 
 	}
 
-
-
 	transform->Update();
+	for (int i = 0; i < NofComponents; i++)
+	{
+		Components[i]->Update();
+	}
 }
 
 void GameObject::Draw()
 {
 	transform->OnDraw();
-
+	for (int i = 0; i < NofComponents; i++)
+	{
+		Components[i]->OnDraw();
+	}
 
 	SDL_Rect renderQuad = { transform->position.x,transform->position.y ,tileWidth,tileHeight }; //This is the quad where it will be rendered
 	SDL_Rect TilesetFrame; //This is the frame on the tileset that will be rendered
@@ -163,6 +172,7 @@ void GameObject::AddComponent(IComponent* Component)
 	
 	Components= (IComponent**)realloc(Components, (NofComponents +1 ) * sizeof(IComponent*));
 	Components[NofComponents] = Component;
+	Component->gameObject = this;
 	NofComponents++;
 }
 
@@ -170,17 +180,20 @@ void GameObject::DetachComponent(IComponent* Component)
 {
 
 	IComponent** f;
+	int newNoC = NofComponents;
 	f = (IComponent**)malloc((NofComponents) * sizeof(IComponent*));
 	int j=0;
 	for (int i = 0; i < NofComponents; i++)
 	{
 		if (Components[i] == Component)
 		{
+			newNoC = NofComponents - 1;
 			continue;
 		}
 		f[j] = Components[i];
 		j++;
 	}
 	Components = f;
+	NofComponents = newNoC;
 	f = nullptr;
 }

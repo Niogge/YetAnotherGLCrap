@@ -28,8 +28,6 @@ void Game::Loop()
 	while (!quit)
 	{
 
-		
-
 		SDL_RenderClear(Renderer);
 
 		Time::Tick();
@@ -38,6 +36,20 @@ void Game::Loop()
 		UpdateMgr::Update();
 		DrawMgr::Draw();
 
+		if (InputMgr::GetKey(SDL_SCANCODE_C))
+		{
+			CMovement* c = charGO->getComponent<CMovement>();
+			//std::cout << typeid(CMovement**).name() << std::endl;
+			if (c != nullptr)
+			{
+				c->SetSpeed(200.);
+			}
+		}
+
+		if (InputMgr::GetKey(SDL_SCANCODE_R))
+		{
+			charGO->DetachComponent<CMovement>();
+		}
 
 		SDL_RenderPresent(Renderer);
 
@@ -102,9 +114,14 @@ bool Game::Init()
 
 
 					charGO = new GameObject();
+					CMovement* movementComponent = new CMovement();
+					movementComponent->SetSpeed(100.);
+					charGO->AddComponent(movementComponent);
 					charGO->Init(Renderer);
 					charGO->UpdateLayer(2);
 					charGO->DrawLayer(2);
+					//movementComponent = nullptr;
+
 
 					Block1 = new GameObject();
 					Block1->Init(Renderer);

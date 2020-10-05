@@ -1,4 +1,3 @@
-#include "ComponentSystem/Transform.h"
 
 Transform::Transform(float x, float y, GameObject* go)
 {

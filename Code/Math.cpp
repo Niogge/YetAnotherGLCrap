@@ -20,8 +20,11 @@ float Vector2::Magnitude()
 void Vector2::Normalize()
 {
     float magnitude = Magnitude();
-    x = x / magnitude;
-    y = y / magnitude;
+    if (magnitude != 0.)
+    {
+        x = x / magnitude;
+        y = y / magnitude;
+    }
 }
 
 Vector2 Vector2::Normalized()
@@ -40,4 +43,15 @@ float Vector2::DotProduct(Vector2 A, Vector2 B)
 Vector2 Vector2::operator*(float B)
 {
     return Vector2(this->x *B, this->y *B);
+}
+
+Vector2 Vector2::operator+(Vector2 B)
+{
+    return Vector2(this->x + B.x, this->y + B.y);
+}
+
+void Vector2::operator+=(Vector2 B)
+{
+    this->x += B.x;
+    this->y += B.y;
 }

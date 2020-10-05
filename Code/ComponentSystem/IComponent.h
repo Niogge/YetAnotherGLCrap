@@ -1,12 +1,13 @@
 #pragma once
 #ifndef ICOMPONENT_H
 #define ICOMPONENT_H
-#include "CoreInclude.h"
+#include "..\CoreInclude.h"
 class IComponent
 {
 private: 
+	friend class GameObject;
 	bool isActive = true ;
-
+	virtual std::string getType() = 0;
 
 public:
 	virtual void Start() = 0;

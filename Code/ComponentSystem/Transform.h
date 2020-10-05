@@ -1,7 +1,7 @@
 #pragma once
 #ifndef TRANSFORM_H
 #define TRANSFORM_H
-#include "CoreInclude.h"
+#include "..\CoreInclude.h"
 
 class GameObject;
 class Transform : public IComponent
@@ -14,7 +14,7 @@ public:
 	virtual void Update();
 	virtual void OnDraw();
 private:
-
+	virtual std::string getType() { return typeid(this).name(); }
 };
 
 #endif // !TRANSFORM_H

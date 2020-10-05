@@ -1,6 +1,6 @@
 #include "InputMgr.h"
 
-SDL_Event e;
+const Uint8* _keyStates = nullptr;
 InputMgr::InputMgr()
 {
 	Init();
@@ -15,27 +15,26 @@ void InputMgr::Init()
 void InputMgr::Free()
 {
 }
-bool InputMgr::GetKey(SDL_Keycode key)
+bool InputMgr::GetKey(SDL_Scancode key)
 {
-
-	if (SDL_PollEvent(&e) != NULL && e.type == SDL_KEYDOWN)
+	if (_keyStates != 0)
 	{
-		if (e.key.keysym.sym == key)
-		{
-			return true;
-		}
-		return false;
+		return _keyStates[key];
 	}
 	return false;
 }
 
 void InputMgr::Update(bool* quitEvent)
 {
-	if (SDL_PollEvent(&e) != NULL)
+	_keyStates = SDL_GetKeyboardState(0);
+	SDL_Event e;
+	while (SDL_PollEvent(&e) != NULL)
 	{
 		if (quitEvent != nullptr && e.type == SDL_QUIT) //quit request, che e` tipo er click sulla X 
 		{
 			*quitEvent = true;
 		}
 	}
+
+
 }

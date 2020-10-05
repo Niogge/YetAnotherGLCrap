@@ -68,10 +68,13 @@
     <ClInclude Include="Code\InputMgr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\IComponent.h">
+    <ClInclude Include="Code\ComponentSystem\CMovement.h">
       <Filter>Header Files\ComponentSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Transform.h">
+    <ClInclude Include="Code\ComponentSystem\Transform.h">
+      <Filter>Header Files\ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\ComponentSystem\IComponent.h">
       <Filter>Header Files\ComponentSystem</Filter>
     </ClInclude>
   </ItemGroup>
@@ -109,8 +112,11 @@
     <ClCompile Include="Code\InputMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Transform.cpp">
+    <ClCompile Include="Code\ComponentSystem\Transform.cpp">
       <Filter>Source Files\ComponentSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\ComponentSystem\CMovement.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
