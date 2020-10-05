@@ -16,6 +16,12 @@
     <Filter Include="Assets">
       <UniqueIdentifier>{4bc35a41-bee8-4e09-b10d-5c6263962b5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ComponentSystem">
+      <UniqueIdentifier>{fee20021-416b-4ebe-9d76-99563143d0a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ComponentSystem">
+      <UniqueIdentifier>{403b772e-835f-4870-955a-686e7945a790}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Tikki.png">
@@ -59,6 +65,15 @@
     <ClInclude Include="Code\GFXMgr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\InputMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\IComponent.h">
+      <Filter>Header Files\ComponentSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Transform.h">
+      <Filter>Header Files\ComponentSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\LTexture.cpp">
@@ -90,6 +105,12 @@
     </ClCompile>
     <ClCompile Include="Code\GFXMgr.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\InputMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Transform.cpp">
+      <Filter>Source Files\ComponentSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

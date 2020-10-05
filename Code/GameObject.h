@@ -9,7 +9,8 @@ Ok so, this is clearly missing a lot of features (like component stuff and some 
 
 class LTexture;
 class Animation;
-
+class Transform;
+class IComponent;
 class GameObject
 {
 public:
@@ -29,14 +30,20 @@ public:
 	void Destroy();
 	void UpdateLayer(int8_t layer);
 	void DrawLayer(int8_t layer);
-	//REMOVE THIS:
-	void Move(Vector2 dir);
+
+	void AddComponent(IComponent* Component);
+	void DetachComponent(IComponent* Component);
+	Transform* transform;
+
 private:
-	Vector2 position;
 	Vector2 pivot;
 	LTexture* texture;
 	SDL_Renderer* mRender;
 	Animation** mAnimationClips;
+
+	IComponent** Components;
+	int NofComponents;
+
 	int currentAnimation;
 	int NofAnimations;
 	int tileWidth;

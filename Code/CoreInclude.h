@@ -10,6 +10,7 @@
 #include <iostream>
 #include <map>
 
+#include "InputMgr.h"
 #include "Math.h"
 #include "Time.h"
 #include "GFXMgr.h"
@@ -19,5 +20,6 @@
 #include "LTexture.h"
 #include "Animation.h"
 #include "Game.h"
-
+#include "ComponentSystem/IComponent.h"
+#include "ComponentSystem/Transform.h"
 #endif // !

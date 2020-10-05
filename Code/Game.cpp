@@ -28,55 +28,13 @@ void Game::Loop()
 	while (!quit)
 	{
 
-		while (SDL_PollEvent(&e) != 0)
-		{
-			if (e.type == SDL_QUIT) //quit request, che e` tipo er click sulla X 
-			{
-				quit = true;
-			}
-			//User presses a key
-			else if (e.type == SDL_KEYDOWN)
-			{
-				//Select surfaces based on key press
-				switch (e.key.keysym.sym)
-				{
-				case SDLK_p:
-					charGO->PlayAnimation();
-					break;
-
-				case SDLK_s:
-					charGO->StopAnimation();
-					break;
-
-				case SDLK_LEFT:
-					charGO->Move(Vector2(-1, 0) * 50. * Time::GetDeltaTime());
-					break;
-
-				case SDLK_RIGHT:
-
-					charGO->Move(Vector2(1, 0) * 50. * Time::GetDeltaTime());
-					break;
-
-				case SDLK_0:
-
-
-					break;
-				case SDLK_9:
-
-
-					break;
-				default:
-
-					break;
-				}
-			}
-		}
+		
 
 		SDL_RenderClear(Renderer);
 
 		Time::Tick();
 
-
+		InputMgr::Update(&quit);
 		UpdateMgr::Update();
 		DrawMgr::Draw();
 
@@ -150,12 +108,12 @@ bool Game::Init()
 
 					Block1 = new GameObject();
 					Block1->Init(Renderer);
-					Block1->Move(Vector2(60, 13));
+					Block1->transform->position = Vector2(60, 13);
 					Block1->DrawLayer(1);
 
 					Block2 = new GameObject();
 					Block2->Init(Renderer);
-					Block2->Move(Vector2(150, 13));
+					Block2->transform->position = Vector2(150, 13);
 					Block2->DrawLayer(3);
 				}
 			}

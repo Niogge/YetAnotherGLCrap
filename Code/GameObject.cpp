@@ -2,7 +2,7 @@
 
 GameObject::GameObject()
 {
-	position = Vector2(0, 0);
+	transform = new Transform(0, 0, this);
 	pivot = Vector2(0.5f, 0.5f);
 	texture =new LTexture();
 	mRender = NULL;
@@ -12,6 +12,8 @@ GameObject::GameObject()
 	tileWidth =0;
 	tileHeight=0 ;
 	active = true;
+	Components = nullptr;
+	NofComponents = 0;
 }
 
 GameObject::~GameObject()
@@ -24,6 +26,9 @@ void GameObject::Init(SDL_Renderer* Renderer)
 	mRender = Renderer;
 	UpdateMgr::Register(this); //Register the gameobject to the various managers
 	DrawMgr::Register(this);
+
+
+	transform->Start();
 }
 
 void GameObject::Update()
@@ -33,11 +38,18 @@ void GameObject::Update()
 		mAnimationClips[currentAnimation]->AnimationExecution();
 
 	}
+
+
+
+	transform->Update();
 }
 
 void GameObject::Draw()
 {
-	SDL_Rect renderQuad = { position.x ,position.y ,tileWidth,tileHeight }; //This is the quad where it will be rendered
+	transform->OnDraw();
+
+
+	SDL_Rect renderQuad = { transform->position.x,transform->position.y ,tileWidth,tileHeight }; //This is the quad where it will be rendered
 	SDL_Rect TilesetFrame; //This is the frame on the tileset that will be rendered
 
 	if (NofAnimations)
@@ -51,6 +63,8 @@ void GameObject::Draw()
 	}
 
 	texture->render(&TilesetFrame, &renderQuad);  //and render it.
+
+
 }
 
 void GameObject::PlayAnimation()
@@ -144,16 +158,29 @@ void GameObject::DrawLayer(int8_t layer)
 	DrawMgr::Register(this, layer);
 }
 
-void GameObject::Move(Vector2 dir)
+void GameObject::AddComponent(IComponent* Component)
 {
-	if (dir.x < 0)
+	
+	Components= (IComponent**)realloc(Components, (NofComponents +1 ) * sizeof(IComponent*));
+	Components[NofComponents] = Component;
+	NofComponents++;
+}
+
+void GameObject::DetachComponent(IComponent* Component)
+{
+
+	IComponent** f;
+	f = (IComponent**)malloc((NofComponents) * sizeof(IComponent*));
+	int j=0;
+	for (int i = 0; i < NofComponents; i++)
 	{
-		texture->flipX  = true;
+		if (Components[i] == Component)
+		{
+			continue;
+		}
+		f[j] = Components[i];
+		j++;
 	}
-	else
-	{
-		texture->flipX = false;
-	}
-	position = Vector2(position.x + dir.x, position.y + dir.y);
-	//std::cout << position.x << std::endl;
+	Components = f;
+	f = nullptr;
 }

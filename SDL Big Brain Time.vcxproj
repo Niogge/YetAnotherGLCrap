@@ -30,9 +30,12 @@
     <ClInclude Include="Code\Game.h" />
     <ClInclude Include="Code\GameObject.h" />
     <ClInclude Include="Code\GFXMgr.h" />
+    <ClInclude Include="Code\IComponent.h" />
+    <ClInclude Include="Code\InputMgr.h" />
     <ClInclude Include="Code\LTexture.h" />
     <ClInclude Include="Code\Math.h" />
     <ClInclude Include="Code\Time.h" />
+    <ClInclude Include="Code\Transform.h" />
     <ClInclude Include="Code\UpdateMgr.h" />
   </ItemGroup>
   <ItemGroup>
@@ -41,10 +44,12 @@
     <ClCompile Include="Code\Game.cpp" />
     <ClCompile Include="Code\GameObject.cpp" />
     <ClCompile Include="Code\GFXMgr.cpp" />
+    <ClCompile Include="Code\InputMgr.cpp" />
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\LTexture.cpp" />
     <ClCompile Include="Code\Math.cpp" />
     <ClCompile Include="Code\Time.cpp" />
+    <ClCompile Include="Code\Transform.cpp" />
     <ClCompile Include="Code\UpdateMgr.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
