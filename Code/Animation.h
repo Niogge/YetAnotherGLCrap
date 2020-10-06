@@ -17,16 +17,18 @@
 class Animation
 {
 public:
-	Animation();
+	Animation(std::string AnimName);
 	~Animation();
 	void SetAnimationClip(int startTileX, int startTileY, int EndTileX, int EndTileY, int tileW, int tileH, int FramesPerSecond);
 	void AnimationExecution();
 	SDL_Rect* GetFrame();
 	void Play();
 	void Stop();
+	std::string getName();
 	bool IsPlaying;
 
 private:
+	std::string AnimationName;
 	int clipLength;
 	SDL_Rect* frames;
 	int currentFrame;

@@ -22,3 +22,7 @@ void Transform::Update()
 void Transform::OnDraw()
 {
 }
+
+void Transform::OnDetach()
+{
+}

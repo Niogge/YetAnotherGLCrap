@@ -5,7 +5,7 @@
 #include <SDL_Image.h>
 
 
-Animation::Animation()
+Animation::Animation(std::string AnimName)
 {
 	int clipLength = 0;
 	int currentFrame = 0;
@@ -13,6 +13,7 @@ Animation::Animation()
 	frames = nullptr;
 	CurrFrameTime = 0.;
 	SecondsPerFrame = 0.;
+	AnimationName = AnimName;
 }
 
 Animation::~Animation()
@@ -62,9 +63,13 @@ SDL_Rect* Animation::GetFrame()
 
 void Animation::Play()
 {
-	IsPlaying = true;
-	currentFrame = 0;
-	CurrFrameTime = 0.;
+	if (!IsPlaying)
+	{
+		IsPlaying = true;
+		currentFrame = 0;
+		CurrFrameTime = 0.;
+
+	}
 }
 
 void Animation::Stop()
@@ -72,4 +77,9 @@ void Animation::Stop()
 	IsPlaying = false;
 	currentFrame = 0;
 	CurrFrameTime = 0.;
+}
+
+std::string Animation::getName()
+{
+	return AnimationName;
 }

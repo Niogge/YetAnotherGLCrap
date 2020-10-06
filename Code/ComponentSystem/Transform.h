@@ -13,6 +13,7 @@ public:
 	virtual void Start();
 	virtual void Update();
 	virtual void OnDraw();
+	virtual void OnDetach();
 private:
 	virtual std::string getType() { return typeid(this).name(); }
 };

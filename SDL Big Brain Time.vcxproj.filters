@@ -116,7 +116,7 @@
       <Filter>Source Files\ComponentSystem</Filter>
     </ClCompile>
     <ClCompile Include="Code\ComponentSystem\CMovement.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ComponentSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

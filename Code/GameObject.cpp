@@ -4,13 +4,12 @@ GameObject::GameObject()
 {
 	transform = new Transform(0, 0, this);
 	pivot = Vector2(0.5f, 0.5f);
-	texture =new LTexture();
+	texture = new LTexture();
 	mRender = NULL;
-	mAnimationClips = NULL;
-	currentAnimation = 0;
+	currentAnimation = "";
 	NofAnimations = 0;
-	tileWidth =0;
-	tileHeight=0 ;
+	tileWidth = 0;
+	tileHeight = 0;
 	active = true;
 	Components = nullptr;
 	NofComponents = 0;
@@ -88,25 +87,38 @@ void GameObject::StopAnimation()
 }
 
 
-void GameObject::SwitchAnimation()
+void GameObject::SwitchAnimation(std::string animName)
 {
-	StopAnimation();
-	currentAnimation = (currentAnimation + 1) % NofAnimations;
+	if (animName != currentAnimation)
+	{
+		StopAnimation();
+		if (mAnimationClips[animName] != NULL)
+		{
+			currentAnimation = animName;
+		}
+	}
 	PlayAnimation();
 
 }
 
-void GameObject::AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY, int FramesPerSecond)
+void GameObject::AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY, int FramesPerSecond, std::string AnimationName)
 {
 	//OK SO. if i have to make an array of classes, i just need an array of pointers to that class.
 	// IF i need to make this array dynamic, then the whole stuff is a pointer to class pointers
 	//--->  Animation**, i have a dynamic array of pointers to animations 
 
-	mAnimationClips = (Animation**)realloc(mAnimationClips, (NofAnimations + 1) * (sizeof(Animation*)));
-	mAnimationClips[NofAnimations] = new Animation();
-	mAnimationClips[NofAnimations]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, tileWidth, tileHeight, FramesPerSecond);
-
+	if (currentAnimation == "")
+	{
+		currentAnimation = AnimationName;
+	}
+	mAnimationClips[AnimationName] = new Animation(AnimationName);
+	mAnimationClips[AnimationName]->SetAnimationClip(startTileX, startTileY, EndTileX, EndTileY, tileWidth, tileHeight, FramesPerSecond);
 	NofAnimations++;
+}
+
+std::string GameObject::GetCurrentAnimation()
+{
+	return currentAnimation;
 }
 
 bool GameObject::LoadTexture(std::string TextureName)
@@ -169,8 +181,8 @@ void GameObject::DrawLayer(int8_t layer)
 
 void GameObject::AddComponent(IComponent* Component)
 {
-	
-	Components= (IComponent**)realloc(Components, (NofComponents +1 ) * sizeof(IComponent*));
+
+	Components = (IComponent**)realloc(Components, (NofComponents + 1) * sizeof(IComponent*));
 	Components[NofComponents] = Component;
 	Component->gameObject = this;
 	NofComponents++;
@@ -182,12 +194,13 @@ void GameObject::DetachComponent(IComponent* Component)
 	IComponent** f;
 	int newNoC = NofComponents;
 	f = (IComponent**)malloc((NofComponents) * sizeof(IComponent*));
-	int j=0;
+	int j = 0;
 	for (int i = 0; i < NofComponents; i++)
 	{
 		if (Components[i] == Component)
 		{
 			newNoC = NofComponents - 1;
+			Component->OnDetach();
 			continue;
 		}
 		f[j] = Components[i];

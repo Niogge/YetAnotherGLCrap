@@ -29,21 +29,36 @@ void CMovement::Update()
 	if (InputMgr::GetKey(SDL_SCANCODE_A))
 	{
 		direction.x = -1.;
+		gameObject->texture->flipX = true;
+
 	}
 	else if (InputMgr::GetKey(SDL_SCANCODE_D))
 	{
 		direction.x = 1.;
+		gameObject->texture->flipX = false;
 	}
 
 
 	direction.Normalize();
-
+	if (direction.Magnitude() != 0.)
+	{
+		gameObject->SwitchAnimation("walk");
+	}
+	else
+	{
+		gameObject->SwitchAnimation("idle");
+	}
 
 	gameObject->transform->position += direction * speed * Time::GetDeltaTime();
 }
 
 void CMovement::OnDraw()
 {
+}
+
+void CMovement::OnDetach()
+{
+	gameObject->SwitchAnimation("idle");
 }
 
 void CMovement::SetSpeed(float s)

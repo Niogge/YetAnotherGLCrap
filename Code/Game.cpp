@@ -166,8 +166,9 @@ bool Game::LoadMedia()
 	{
 
 
-		charGO->AddAnimation(0, 1, 3, 1, 4);
-		charGO->AddAnimation(0, 2, 4, 2, 4);
+		charGO->AddAnimation(0, 0, 2, 0, 4,"idle");
+		charGO->AddAnimation(0, 1, 3, 1, 4,"walk");
+		charGO->AddAnimation(0, 2, 4, 2, 4,"die");
 
 
 	}

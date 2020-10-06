@@ -22,8 +22,9 @@ public:
 	void Draw();
 	void PlayAnimation();
 	void StopAnimation();
-	void SwitchAnimation();
-	void AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY, int FramesPerSecond);
+	void SwitchAnimation(std::string animName);
+	void AddAnimation(int startTileX, int startTileY, int EndTileX, int EndTileY, int FramesPerSecond, std::string AnimationName);
+	std::string GetCurrentAnimation();
 	bool LoadTexture(std::string TextureName);
 	bool LoadTexture(std::string TextureName, int TileWidth, int TileHeight);
 	bool isActive();
@@ -39,17 +40,17 @@ public:
 	template <typename T>
 	void DetachComponent();
 	Transform* transform;
+	LTexture* texture;
 
 private:
 	Vector2 pivot;
-	LTexture* texture;
 	SDL_Renderer* mRender;
-	Animation** mAnimationClips;
+	std::map<std::string, Animation*> mAnimationClips;
 
 	IComponent** Components;
 	int NofComponents;
 
-	int currentAnimation;
+	std::string currentAnimation;
 	int NofAnimations;
 	int tileWidth;
 	int tileHeight;

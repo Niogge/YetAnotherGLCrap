@@ -12,6 +12,7 @@ public:
 	virtual void Start();
 	virtual void Update();
 	virtual void OnDraw();
+	virtual void OnDetach();
 	void SetSpeed(float s);
 private:
 	virtual std::string getType() { return typeid(this).name(); }
