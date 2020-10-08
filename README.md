@@ -46,7 +46,7 @@ UpdateMgr.cpp and DrawMgr.cpp)
  <br>
 #### Why (almost) no container? ####
  Ofc i could have used list, stacks and queues (which i'll probably use in a component or two later on), but i needed to sharpen my pointer math.
- So, I know the code could be faster, but that's not the point...er.
+ So, I know the code could be better faster stronger, but that's not the point...er.
  <br>
 #### Then why you use std::map? #### 
  'cause I'm lazy. 
