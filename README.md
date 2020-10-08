@@ -41,11 +41,12 @@ UpdateMgr.cpp and DrawMgr.cpp)
 
  ### FAQ ###
 <br>
- #### You suck! it does not compile, I have some linker errors ####
+#### You suck! it does not compile, I have some linker errors ####
  Yes! you need to have your own sdl h and lib somewhere in your pc, and link them in the project! 
  <br>
- #### Why (almost) no container? ####
+#### Why (almost) no container? ####
  Ofc i could have used list, stacks and queues (which i'll probably use in a component or two later on), but i needed to sharpen my pointer math.
  So, I know the code could be faster, but that's not the point...er.
- #### Then why you use std::map? #### 
+ <br>
+#### Then why you use std::map? #### 
  'cause I'm lazy. 
