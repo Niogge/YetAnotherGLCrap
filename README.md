@@ -35,3 +35,17 @@ This update needs a change also in the register and remove functions, the former
 with a map of int8_t as key and GameObject** as value, the latter it's a bit more tricky:<br> Find the layer where is contained the GameObject
 you want to remove, then do some shady memory allocation magic and substitute the new GameObject** (you can find this procedure inside 
 UpdateMgr.cpp and DrawMgr.cpp)
+
+<br>
+<hr/>
+
+ ### FAQ ###
+<br>
+ #### You suck! it does not compile, I have some linker errors ####
+ Yes! you need to have your own sdl h and lib somewhere in your pc, and link them in the project! 
+ <br>
+ #### Why (almost) no container? ####
+ Ofc i could have used list, stacks and queues (which i'll probably use in a component or two later on), but i needed to sharpen my pointer math.
+ So, I know the code could be faster, but that's not the point...er.
+ #### Then why you use std::map? #### 
+ 'cause I'm lazy. 
