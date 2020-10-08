@@ -41,7 +41,7 @@ UpdateMgr.cpp and DrawMgr.cpp)
 
  ### FAQ ###
 <br>
-#### You suck! it does not compile, I have some linker errors #
+### You suck! it does not compile, I have some linker errors ###
  Yes! you need to have your own sdl h and lib somewhere in your pc, and link them in the project! 
  <br>
 #### Why (almost) no container? ####
