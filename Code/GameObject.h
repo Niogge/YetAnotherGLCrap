@@ -12,6 +12,7 @@ class LTexture;
 class Animation;
 class Transform;
 class IComponent;
+class Rigidbody;
 class GameObject
 {
 public:
@@ -41,6 +42,7 @@ public:
 	void DetachComponent();
 	Transform* transform;
 	LTexture* texture;
+	Rigidbody* RB;
 
 private:
 	Vector2 pivot;
@@ -67,7 +69,6 @@ inline T* GameObject::getComponent()
 		//std::cout << Components[i]->getType() << " " << typeid(T*).name() << std::endl;
 		if (Components[i]->getType() == typeid(T*).name())
 		{
-
 			return (T*)Components[i];
 		}
 	}

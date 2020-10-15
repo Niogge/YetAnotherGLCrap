@@ -36,6 +36,7 @@
     <ClInclude Include="Code\InputMgr.h" />
     <ClInclude Include="Code\LTexture.h" />
     <ClInclude Include="Code\Math.h" />
+    <ClInclude Include="Code\Physics\Rigidbody.h" />
     <ClInclude Include="Code\Time.h" />
     <ClInclude Include="Code\UpdateMgr.h" />
   </ItemGroup>
@@ -51,6 +52,7 @@
     <ClCompile Include="Code\Main.cpp" />
     <ClCompile Include="Code\LTexture.cpp" />
     <ClCompile Include="Code\Math.cpp" />
+    <ClCompile Include="Code\Physics\Rigidbody.cpp" />
     <ClCompile Include="Code\Time.cpp" />
     <ClCompile Include="Code\UpdateMgr.cpp" />
   </ItemGroup>

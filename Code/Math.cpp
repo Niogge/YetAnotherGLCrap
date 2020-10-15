@@ -45,6 +45,11 @@ Vector2 Vector2::operator*(float B)
     return Vector2(this->x *B, this->y *B);
 }
 
+Vector2 Vector2::operator/(float B)
+{
+    return Vector2(this->x / B, this->y / B);
+}
+
 Vector2 Vector2::operator+(Vector2 B)
 {
     return Vector2(this->x + B.x, this->y + B.y);

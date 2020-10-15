@@ -11,6 +11,7 @@
 #include <map>
 #include <typeinfo>
 
+
 #include "InputMgr.h"
 #include "Math.h"
 #include "Time.h"
@@ -23,5 +24,8 @@
 #include "ComponentSystem/IComponent.h"
 #include "ComponentSystem/Transform.h"
 #include "ComponentSystem/CMovement.h"
+#include "Physics/Rigidbody.h"
 #include "GameObject.h"
+
+
 #endif // !

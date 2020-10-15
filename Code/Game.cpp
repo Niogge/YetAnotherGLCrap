@@ -118,6 +118,7 @@ bool Game::Init()
 					movementComponent->SetSpeed(100.);
 					charGO->AddComponent(movementComponent);
 					charGO->Init(Renderer);
+					charGO->RB = new Rigidbody(charGO);
 					charGO->UpdateLayer(2);
 					charGO->DrawLayer(2);
 					//movementComponent = nullptr;

@@ -5,6 +5,7 @@ GameObject::GameObject()
 	transform = new Transform(0, 0, this);
 	pivot = Vector2(0.5f, 0.5f);
 	texture = new LTexture();
+	RB = nullptr;
 	mRender = NULL;
 	currentAnimation = "";
 	NofAnimations = 0;
@@ -36,6 +37,7 @@ void GameObject::Init(SDL_Renderer* Renderer)
 
 void GameObject::Update()
 {
+	
 	if (NofAnimations > 0)
 	{
 		mAnimationClips[currentAnimation]->AnimationExecution();
@@ -46,6 +48,11 @@ void GameObject::Update()
 	for (int i = 0; i < NofComponents; i++)
 	{
 		Components[i]->Update();
+	}
+
+	if (RB != nullptr)
+	{
+		RB->Update();
 	}
 }
 

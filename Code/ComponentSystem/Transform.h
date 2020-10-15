@@ -14,6 +14,8 @@ public:
 	virtual void Update();
 	virtual void OnDraw();
 	virtual void OnDetach();
+	Vector2 Up();
+	Vector2 Forward();
 private:
 	virtual std::string getType() { return typeid(this).name(); }
 };

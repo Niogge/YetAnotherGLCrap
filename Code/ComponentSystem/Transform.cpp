@@ -26,3 +26,13 @@ void Transform::OnDraw()
 void Transform::OnDetach()
 {
 }
+
+Vector2 Transform::Up()
+{
+	return Vector2(0,-1);
+}
+
+Vector2 Transform::Forward()
+{
+	return Vector2(1,0);
+}

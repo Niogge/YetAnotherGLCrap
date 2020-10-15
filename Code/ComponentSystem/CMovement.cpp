@@ -38,6 +38,10 @@ void CMovement::Update()
 		gameObject->texture->flipX = false;
 	}
 
+	if (InputMgr::GetKey(SDL_SCANCODE_SPACE))
+	{
+		gameObject->RB->AddForce(gameObject->transform->Up() * 30);
+	}
 
 	direction.Normalize();
 	if (direction.Magnitude() != 0.)
