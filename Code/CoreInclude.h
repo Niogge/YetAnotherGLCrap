@@ -24,8 +24,10 @@
 #include "ComponentSystem/IComponent.h"
 #include "ComponentSystem/Transform.h"
 #include "ComponentSystem/CMovement.h"
+#include "Physics/PhysicsMgr.h"
 #include "Physics/Rigidbody.h"
+#include "Physics/Rect.h"
+#include "Physics/Shape.h"
 #include "GameObject.h"
-
 
 #endif // !

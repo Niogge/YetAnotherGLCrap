@@ -60,3 +60,8 @@ void Vector2::operator+=(Vector2 B)
     this->x += B.x;
     this->y += B.y;
 }
+
+Vector2 Vector2::operator-(Vector2 B)
+{
+    return Vector2(this->x - B.x, this->y - B.y);
+}

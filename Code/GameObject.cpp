@@ -50,10 +50,10 @@ void GameObject::Update()
 		Components[i]->Update();
 	}
 
-	if (RB != nullptr)
+	/*if (RB != nullptr)
 	{
 		RB->Update();
-	}
+	}*/
 }
 
 void GameObject::Draw()

@@ -33,9 +33,6 @@ void Game::Loop()
 		Time::Tick();
 
 		InputMgr::Update(&quit);
-		UpdateMgr::Update();
-		DrawMgr::Draw();
-
 		if (InputMgr::GetKey(SDL_SCANCODE_C))
 		{
 			CMovement* c = charGO->getComponent<CMovement>();
@@ -50,6 +47,11 @@ void Game::Loop()
 		{
 			charGO->DetachComponent<CMovement>();
 		}
+
+		UpdateMgr::Update();
+		PhysicsMgr::UpdatePhysics();
+
+		DrawMgr::Draw();
 
 		SDL_RenderPresent(Renderer);
 
@@ -95,6 +97,7 @@ bool Game::Init()
 				UpdateMgr::Init();
 				GFXMgr::Init(Renderer);
 				DrawMgr::Init();
+				PhysicsMgr::Init();
 				Time::Init();
 
 				//init Render Color
@@ -119,10 +122,12 @@ bool Game::Init()
 					charGO->AddComponent(movementComponent);
 					charGO->Init(Renderer);
 					charGO->RB = new Rigidbody(charGO);
+					charGO->RB->EnableGravity(false);
+					
+					charGO->RB->MakeCollider(Vector2(0, 0), 60,60);
 					charGO->UpdateLayer(2);
 					charGO->DrawLayer(2);
 					//movementComponent = nullptr;
-
 
 					Block1 = new GameObject();
 					Block1->Init(Renderer);
@@ -132,6 +137,9 @@ bool Game::Init()
 					Block2 = new GameObject();
 					Block2->Init(Renderer);
 					Block2->transform->position = Vector2(150, 13);
+					Block2->RB = new Rigidbody(Block2);
+					Block2->RB->EnableGravity(false);
+					Block2->RB->MakeCollider(Vector2(0, 0), 60,60);
 					Block2->DrawLayer(3);
 				}
 			}

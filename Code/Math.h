@@ -22,6 +22,7 @@ public:
 	Vector2 operator/ (float B);
 	Vector2 operator+ (Vector2 B);
 	void operator+= (Vector2 B);
+	Vector2 operator- (Vector2 B);
 
 };
 #endif // !MATH_H

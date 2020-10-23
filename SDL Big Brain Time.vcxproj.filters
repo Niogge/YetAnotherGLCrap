@@ -86,6 +86,15 @@
     <ClInclude Include="Code\Physics\Rigidbody.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Physics\Shape.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Physics\Rect.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Physics\PhysicsMgr.h">
+      <Filter>Header Files\Physics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\LTexture.cpp">
@@ -128,6 +137,15 @@
       <Filter>Source Files\ComponentSystem</Filter>
     </ClCompile>
     <ClCompile Include="Code\Physics\Rigidbody.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Physics\Shape.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Physics\Rect.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Physics\PhysicsMgr.cpp">
       <Filter>Source Files\Physics</Filter>
     </ClCompile>
   </ItemGroup>
