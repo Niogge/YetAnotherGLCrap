@@ -1,4 +1,5 @@
 #include "Math.h"
+#include <math.h>
 
 Vector2::Vector2()
 {
@@ -15,6 +16,16 @@ Vector2::Vector2(float x, float y)
 float Vector2::Magnitude()
 {
     return sqrt(x * x + y * y);
+}
+
+float Vector2::SignedMagnitude()
+{
+    float mag = sqrt(x * x + y * y);
+    if (x < 0 || y < 0)
+    {
+        mag = -mag;
+    }
+    return mag;
 }
 
 void Vector2::Normalize()
@@ -38,6 +49,14 @@ Vector2 Vector2::Normalized()
 float Vector2::DotProduct(Vector2 A, Vector2 B)
 {
     return (A.x * B.x + A.y * B.y);
+}
+
+Vector2 Vector2::Rotate(float angle, Vector2 toRotate, Vector2 center)
+{
+    Vector2 actualVector = toRotate - center;
+    actualVector = Vector2(actualVector.x * cos(angle) - actualVector.y * sin(angle), actualVector.x * sin(angle) + actualVector.y * cos(angle));
+    actualVector = actualVector + center;
+    return actualVector;
 }
 
 Vector2 Vector2::operator*(float B)
@@ -65,3 +84,4 @@ Vector2 Vector2::operator-(Vector2 B)
 {
     return Vector2(this->x - B.x, this->y - B.y);
 }
+

@@ -52,7 +52,7 @@ Vector2 Rect::GetRelativeXaxis()
 Projection Rect::ProjectRect(Vector2 Axis)
 {
 	float minMagnitude = 10000.;
-	float maxMagnitude = 0;
+	float maxMagnitude = -10000.;
 	Projection pr = Projection();
 	Vector2 Points[]{
 		GetPosition() + rigidBody->GetTransform()->Forward() * GetHalfWidth() + rigidBody->GetTransform()->Up()*GetHalfHeight(),
@@ -84,16 +84,16 @@ bool Rect::Collides(Rect* other)
 		Vector2 axis = axes[i];
 		Projection ThisRect = this->ProjectRect(axis);
 		Projection OtherRect = other->ProjectRect(axis);
-		if (ThisRect.min.Magnitude() < OtherRect.min.Magnitude())
+		if (ThisRect.min.SignedMagnitude() < OtherRect.min.SignedMagnitude())
 		{
-			if (ThisRect.max.Magnitude() < OtherRect.min.Magnitude())//No collision
+			if (ThisRect.max.SignedMagnitude() < OtherRect.min.SignedMagnitude())//No collision
 			{
 				return false;
 			}
 		}
-		else if(ThisRect.min.Magnitude() > OtherRect.min.Magnitude())
+		else if(ThisRect.min.SignedMagnitude() > OtherRect.min.SignedMagnitude())
 		{
-			if (OtherRect.max.Magnitude() < ThisRect.min.Magnitude())// No Collision
+			if (OtherRect.max.SignedMagnitude() < ThisRect.min.SignedMagnitude())// No Collision
 			{
 				return false;
 			}

@@ -77,7 +77,7 @@ void LTexture::setAlpha(Uint8 alpha)
 	SDL_SetTextureAlphaMod(mTexture, alpha);
 }
 
-void LTexture::render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad)
+void LTexture::render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad, float angle)
 {
 	
 	SDL_RendererFlip flipType;
@@ -90,7 +90,7 @@ void LTexture::render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad)
 		flipType = SDL_FLIP_NONE;
 	}
 
-	SDL_RenderCopyEx(mRender, mTexture, TilesetFrame, renderQuad,0,NULL,flipType);
+	SDL_RenderCopyEx(mRender, mTexture, TilesetFrame, renderQuad,angle,NULL,flipType);
 }
 
 int LTexture::getWidth()

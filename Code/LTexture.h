@@ -16,7 +16,7 @@ public:
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);
 	void setBlendMode(SDL_BlendMode blending);
 	void setAlpha(Uint8 alpha);
-	void render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad);
+	void render(SDL_Rect* TilesetFrame, SDL_Rect* renderQuad, float angle);
 	int getWidth();
 	int getHeight();
 	bool flipX;

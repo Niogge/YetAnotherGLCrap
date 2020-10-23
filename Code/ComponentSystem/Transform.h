@@ -10,10 +10,12 @@ public:
 	Transform(float x, float y, GameObject * go);
 	~Transform();
 	Vector2 position;
+	float Rotation;
 	virtual void Start();
 	virtual void Update();
 	virtual void OnDraw();
 	virtual void OnDetach();
+	float Rotate(float angle);
 	Vector2 Up();
 	Vector2 Forward();
 private:

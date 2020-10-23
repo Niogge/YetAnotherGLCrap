@@ -53,6 +53,12 @@ void Game::Loop()
 
 		DrawMgr::Draw();
 
+		SDL_Rect outlineRect = { charGO->transform->position.x, charGO->transform->position.y, 68,80 };
+		SDL_SetRenderDrawColor(Renderer, 0x00, 0xFF, 0x00, 0xFF);
+		SDL_RenderDrawRect(Renderer, &outlineRect);
+		SDL_SetRenderDrawColor(Renderer, 0x8A, 0x8A, 0x8A, 0xFF);
+
+
 		SDL_RenderPresent(Renderer);
 
 		SDL_Delay(16);
@@ -124,7 +130,7 @@ bool Game::Init()
 					charGO->RB = new Rigidbody(charGO);
 					charGO->RB->EnableGravity(false);
 					
-					charGO->RB->MakeCollider(Vector2(0, 0), 60,60);
+					charGO->RB->MakeCollider(Vector2(0, 0), 68,80);
 					charGO->UpdateLayer(2);
 					charGO->DrawLayer(2);
 					//movementComponent = nullptr;
@@ -141,6 +147,7 @@ bool Game::Init()
 					Block2->RB->EnableGravity(false);
 					Block2->RB->MakeCollider(Vector2(0, 0), 60,60);
 					Block2->DrawLayer(3);
+					Block2->transform->Rotate(45);
 				}
 			}
 

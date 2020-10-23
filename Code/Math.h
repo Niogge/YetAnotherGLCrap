@@ -14,9 +14,11 @@ public:
 	float x;
 	float y;
 	float Magnitude();
+	float SignedMagnitude();
 	void Normalize();
 	Vector2 Normalized();
 	static float DotProduct(Vector2 A, Vector2 B);
+	static Vector2 Rotate(float angle, Vector2 toRotate, Vector2 center = Vector2(0, 0));
 
 	Vector2 operator* (float B);
 	Vector2 operator/ (float B);
@@ -25,4 +27,5 @@ public:
 	Vector2 operator- (Vector2 B);
 
 };
+
 #endif // !MATH_H

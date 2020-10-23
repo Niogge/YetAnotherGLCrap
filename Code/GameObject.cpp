@@ -77,7 +77,7 @@ void GameObject::Draw()
 		TilesetFrame = { 0, 0, texture->getWidth(),texture->getWidth() };
 	}
 
-	texture->render(&TilesetFrame, &renderQuad);  //and render it.
+	texture->render(&TilesetFrame, &renderQuad, transform->Rotation);  //and render it.
 
 
 }
