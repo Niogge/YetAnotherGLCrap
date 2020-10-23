@@ -13,11 +13,13 @@ Features:
 - GFX Manager
 - Input Manager 
 - Component system
+- Basic physics (RB, gravity)
+- Collisions (SAT, only rect for now)
+- Physics Manager
 
 Next steps:
 - Scene manager
-- Basic physics
-- Collisions
+
 
 Will code someday:
 - Sfx manager 
