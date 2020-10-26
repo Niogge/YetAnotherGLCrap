@@ -13,6 +13,7 @@ Game::Game(int W, int H, std::string Name)
 	Window = NULL;
 	ScreenSurface = NULL;
 	Renderer = NULL;
+
 }
 
 Game::~Game()
