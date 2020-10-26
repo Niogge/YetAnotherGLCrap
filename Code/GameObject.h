@@ -33,6 +33,9 @@ public:
 	void Destroy();
 	void UpdateLayer(int8_t layer);
 	void DrawLayer(int8_t layer);
+	void OnCollision(Rect* other);
+
+
 
 	void AddComponent(IComponent* Component);
 	void DetachComponent(IComponent* Component);
@@ -43,6 +46,7 @@ public:
 	Transform* transform;
 	LTexture* texture;
 	Rigidbody* RB;
+	std::string tag;
 
 private:
 	Vector2 pivot;

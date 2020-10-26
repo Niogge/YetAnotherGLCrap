@@ -5,8 +5,8 @@
 #include "..\CoreInclude.h"
 struct Projection
 {
-	Vector2 max;
-	Vector2 min;
+	float max;
+	float min;
 };
 
 
@@ -22,6 +22,10 @@ public:
 	Vector2 GetRelativeYaxis();
 	Vector2 GetRelativeXaxis();
 	Projection ProjectRect(Vector2 Axis);
+	using Shape::GetTag;
+	using Shape::GetPosition;
+	using Shape::GetTransform;
+
 private:
 	float Width;
 	float Height;

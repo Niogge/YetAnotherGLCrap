@@ -52,7 +52,8 @@ void PhysicsMgr::UpdatePhysics()
 		{
 			if (RigidBodyList[i]->Collider->Collides(RigidBodyList[j]->Collider))//They Collide baby
 			{
-				std::cout << "COLLISIONE BABY" << std::endl;
+				RigidBodyList[i]->Owner->OnCollision(RigidBodyList[j]->Collider);
+				RigidBodyList[j]->Owner->OnCollision(RigidBodyList[i]->Collider);
 			}
 		}
 	}

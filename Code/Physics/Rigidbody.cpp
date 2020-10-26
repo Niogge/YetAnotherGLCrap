@@ -70,6 +70,11 @@ void Rigidbody::MakeCollider(Vector2 offset, float width, float height)
 	Collider = new Rect(offset, this, width, height);
 }
 
+std::string Rigidbody::GetTag()
+{
+	return Owner->tag;
+}
+
 void Rigidbody::Update()
 {
 	if (UseGravity)

@@ -13,7 +13,9 @@ protected:
 public:
 	Shape(Vector2 offset, Rigidbody* rb);
 	Vector2 GetPosition();
+	Transform* GetTransform();
 	virtual bool Contains(Vector2 point) = 0;
+	std::string GetTag();
 };
 
 #endif // !SHAPE_H

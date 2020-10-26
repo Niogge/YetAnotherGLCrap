@@ -16,6 +16,7 @@ Features:
 - Basic physics (RB, gravity)
 - Collisions (SAT, only rect for now)
 - Physics Manager
+- Transform Parenting (missing some features, will implement soon)
 
 Next steps:
 - Scene manager

@@ -64,7 +64,7 @@ void GameObject::Draw()
 		Components[i]->OnDraw();
 	}
 
-	SDL_Rect renderQuad = { transform->position.x,transform->position.y ,tileWidth,tileHeight }; //This is the quad where it will be rendered
+	SDL_Rect renderQuad = { transform->position.x - pivot.x * tileWidth,transform->position.y - pivot.y * tileHeight,tileWidth,tileHeight }; //This is the quad where it will be rendered
 	SDL_Rect TilesetFrame; //This is the frame on the tileset that will be rendered
 
 	if (NofAnimations)
@@ -184,6 +184,14 @@ void GameObject::DrawLayer(int8_t layer)
 {
 	DrawMgr::Remove(this);
 	DrawMgr::Register(this, layer);
+}
+
+void GameObject::OnCollision(Rect * other)
+{
+	for (int i = 0; i < NofComponents; i++)
+	{
+		Components[i]->OnCollision(other);
+	}
 }
 
 void GameObject::AddComponent(IComponent* Component)

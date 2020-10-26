@@ -15,11 +15,19 @@ public:
 	virtual void Update();
 	virtual void OnDraw();
 	virtual void OnDetach();
+	virtual void OnCollision(Rect * other);
 	float Rotate(float angle);
 	Vector2 Up();
 	Vector2 Forward();
+	void SetParent(Transform* p);
+	void SetParent(Transform* p, Vector2 pos, float angle);
+	Transform* GetParent();
+	void DetachParent();
 private:
 	virtual std::string getType() { return typeid(this).name(); }
+	Transform* parent;
+	Vector2 relativePosition;
+	float relativeRotation;
 };
 
 #endif // !TRANSFORM_H

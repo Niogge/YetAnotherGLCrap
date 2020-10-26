@@ -65,16 +65,20 @@ Projection Rect::ProjectRect(Vector2 Axis)
 		float projection = Vector2::DotProduct(Points[i], Axis);
 		if(projection > maxMagnitude){
 			maxMagnitude = projection;
-			pr.max = Axis* projection;
+			pr.max =  projection;
 		}
 		if (projection < minMagnitude)
 		{
 			minMagnitude = projection;
-			pr.min = Axis * projection;
+			pr.min =  projection;
 		}
 	}
 	return pr;
 }
+
+
+
+
 
 bool Rect::Collides(Rect* other)
 {
@@ -84,16 +88,17 @@ bool Rect::Collides(Rect* other)
 		Vector2 axis = axes[i];
 		Projection ThisRect = this->ProjectRect(axis);
 		Projection OtherRect = other->ProjectRect(axis);
-		if (ThisRect.min.SignedMagnitude() < OtherRect.min.SignedMagnitude())
+
+		if (ThisRect.min < OtherRect.min)
 		{
-			if (ThisRect.max.SignedMagnitude() < OtherRect.min.SignedMagnitude())//No collision
+			if (ThisRect.max < OtherRect.min)//No collision
 			{
 				return false;
 			}
 		}
-		else if(ThisRect.min.SignedMagnitude() > OtherRect.min.SignedMagnitude())
+		else if(ThisRect.min > OtherRect.min)
 		{
-			if (OtherRect.max.SignedMagnitude() < ThisRect.min.SignedMagnitude())// No Collision
+			if (OtherRect.max < ThisRect.min)// No Collision
 			{
 				return false;
 			}

@@ -10,3 +10,13 @@ Vector2 Shape::GetPosition()
 {
 	return rigidBody->GetPosition() + relativePosition;
 }
+
+Transform* Shape::GetTransform()
+{
+	return rigidBody->GetTransform();
+}
+
+std::string Shape::GetTag()
+{
+	return rigidBody->GetTag();
+}

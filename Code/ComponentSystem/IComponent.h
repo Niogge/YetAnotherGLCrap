@@ -2,6 +2,7 @@
 #ifndef ICOMPONENT_H
 #define ICOMPONENT_H
 #include "..\CoreInclude.h"
+class Rect;
 class IComponent
 {
 private: 
@@ -14,6 +15,7 @@ public:
 	virtual void Update()=0 ;
 	virtual void OnDraw()=0;
 	virtual void OnDetach() = 0;
+	virtual void OnCollision(Rect * other) = 0;
 	GameObject* gameObject;
 	virtual bool IsActive() { return isActive; };
 	virtual bool SetActive(bool active) { isActive = active; return isActive; };

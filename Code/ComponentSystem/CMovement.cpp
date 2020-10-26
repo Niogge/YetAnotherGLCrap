@@ -3,6 +3,7 @@
 CMovement::CMovement()
 {
 	speed = 0.;
+	childCount = 0;
 }
 
 CMovement::~CMovement()
@@ -64,6 +65,17 @@ void CMovement::OnDetach()
 {
 	gameObject->SwitchAnimation("idle");
 }
+
+void CMovement::OnCollision(Rect* other)
+{
+	if (other->GetTag() == "Block" && other->GetTransform()->GetParent() == nullptr)
+	{
+		other->GetTransform()->SetParent(gameObject->transform, Vector2(-100+10*childCount, 0), 46+8*childCount);
+		childCount++;
+	}
+}
+
+
 
 void CMovement::SetSpeed(float s)
 {

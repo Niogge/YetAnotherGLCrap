@@ -1,8 +1,7 @@
 #include "Game.h"
 
 GameObject* charGO;
-GameObject* Block1;
-GameObject* Block2;
+GameObject* Blocks[4];
 
 Game::Game(int W, int H, std::string Name)
 {
@@ -54,10 +53,10 @@ void Game::Loop()
 
 		DrawMgr::Draw();
 
-		SDL_Rect outlineRect = { charGO->transform->position.x, charGO->transform->position.y, 68,80 };
-		SDL_SetRenderDrawColor(Renderer, 0x00, 0xFF, 0x00, 0xFF);
-		SDL_RenderDrawRect(Renderer, &outlineRect);
-		SDL_SetRenderDrawColor(Renderer, 0x8A, 0x8A, 0x8A, 0xFF);
+		//SDL_Rect outlineRect = { charGO->transform->position.x-10, charGO->transform->position.y-10, 20,20 };
+		//SDL_SetRenderDrawColor(Renderer, 0x00, 0xFF, 0x00, 0xFF);
+		//SDL_RenderDrawRect(Renderer, &outlineRect);
+		//SDL_SetRenderDrawColor(Renderer, 0x8A, 0x8A, 0x8A, 0xFF);
 
 
 		SDL_RenderPresent(Renderer);
@@ -130,25 +129,29 @@ bool Game::Init()
 					charGO->Init(Renderer);
 					charGO->RB = new Rigidbody(charGO);
 					charGO->RB->EnableGravity(false);
+					charGO->transform->position = Vector2(60, 40);
 					
-					charGO->RB->MakeCollider(Vector2(0, 0), 68,80);
+					charGO->RB->MakeCollider(Vector2(0, 0), 20,20);
+					charGO->tag = "Player";
 					charGO->UpdateLayer(2);
 					charGO->DrawLayer(2);
 					//movementComponent = nullptr;
 
-					Block1 = new GameObject();
-					Block1->Init(Renderer);
-					Block1->transform->position = Vector2(60, 13);
-					Block1->DrawLayer(1);
 
-					Block2 = new GameObject();
-					Block2->Init(Renderer);
-					Block2->transform->position = Vector2(150, 13);
-					Block2->RB = new Rigidbody(Block2);
-					Block2->RB->EnableGravity(false);
-					Block2->RB->MakeCollider(Vector2(0, 0), 60,60);
-					Block2->DrawLayer(3);
-					Block2->transform->Rotate(45);
+					for (int i = 0; i < 4; i++)
+					{
+
+						Blocks[i] = new GameObject();
+						Blocks[i]->Init(Renderer);
+						Blocks[i]->transform->position = Vector2(90*i+180, 40);
+						Blocks[i]->RB = new Rigidbody(Blocks[i]);
+						Blocks[i]->RB->EnableGravity(false);
+						Blocks[i]->RB->MakeCollider(Vector2(0, 0), 60,60);
+						Blocks[i]->tag = "Block";
+						Blocks[i]->DrawLayer(1);
+						Blocks[i]->transform->Rotate(15*i);
+						
+					}
 				}
 			}
 
@@ -189,15 +192,14 @@ bool Game::LoadMedia()
 
 
 	}
-	if (!Block1->LoadTexture("Block"))
+	for (int i = 0; i < 4; i++)
 	{
-		printf("Failed to load Block texture image!\n");
-		success = false;
-	}
-	if (!Block2->LoadTexture("Block"))
-	{
-		printf("Failed to load Block texture image!\n");
-		success = false;
+
+		if (!Blocks[i]->LoadTexture("Block"))
+		{
+			printf("Failed to load Block texture image!\n");
+			success = false;
+		}
 	}
 	return success;
 }

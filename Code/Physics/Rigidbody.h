@@ -20,6 +20,7 @@ public:
 	bool SetActive(bool active);
 	Rect* GetCollider();
 	void MakeCollider(Vector2 offset, float width, float height);
+	std::string GetTag();
 private:
 	friend class GameObject;
 	friend class PhysicsMgr;
