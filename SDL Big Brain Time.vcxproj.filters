@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{ae6e4ac2-c1e4-4eef-a9ae-a31c34cb2bd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{4c05ace5-c4f0-4644-a9d7-da1890a88404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene">
+      <UniqueIdentifier>{05471888-2b42-4e4b-97c6-581becd092a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Tikki.png">
@@ -95,6 +101,18 @@
     <ClInclude Include="Code\Physics\PhysicsMgr.h">
       <Filter>Header Files\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Scene\Scene.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scene\SceneMgr.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scene\TestSceneOne.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scene\TestSceneTwo.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\LTexture.cpp">
@@ -147,6 +165,18 @@
     </ClCompile>
     <ClCompile Include="Code\Physics\PhysicsMgr.cpp">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Scene\Scene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Scene\SceneMgr.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Scene\TestSceneOne.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Scene\TestSceneTwo.cpp">
+      <Filter>Source Files\Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

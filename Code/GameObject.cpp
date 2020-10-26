@@ -170,8 +170,10 @@ void GameObject::Destroy()
 {
 	UpdateMgr::Remove(this);
 	DrawMgr::Remove(this);
-	mRender = NULL;
-	texture->free();
+	if(RB!= nullptr)
+		PhysicsMgr::Remove(RB);
+	//mRender = NULL;
+	//texture->free();
 }
 
 void GameObject::UpdateLayer(int8_t layer)

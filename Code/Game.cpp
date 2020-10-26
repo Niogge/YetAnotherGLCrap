@@ -1,7 +1,6 @@
 #include "Game.h"
 
-GameObject* charGO;
-GameObject* Blocks[4];
+
 
 Game::Game(int W, int H, std::string Name)
 {
@@ -33,21 +32,16 @@ void Game::Loop()
 		Time::Tick();
 
 		InputMgr::Update(&quit);
-		if (InputMgr::GetKey(SDL_SCANCODE_C))
+		if (InputMgr::GetKey(SDL_SCANCODE_P))
 		{
-			CMovement* c = charGO->getComponent<CMovement>();
-			//std::cout << typeid(CMovement**).name() << std::endl;
-			if (c != nullptr)
-			{
-				c->SetSpeed(200.);
-			}
+			SceneMgr::SetScene(1);
 		}
-
-		if (InputMgr::GetKey(SDL_SCANCODE_R))
+		if (InputMgr::GetKey(SDL_SCANCODE_Q))
 		{
-			charGO->DetachComponent<CMovement>();
-		}
 
+			SceneMgr::SetScene(0);
+		}
+		SceneMgr::UpdateScene();
 		UpdateMgr::Update();
 		PhysicsMgr::UpdatePhysics();
 
@@ -102,6 +96,7 @@ bool Game::Init()
 				//Remember? friend class! :D 
 				UpdateMgr::Init();
 				GFXMgr::Init(Renderer);
+				SceneMgr::Init(this);
 				DrawMgr::Init();
 				PhysicsMgr::Init();
 				Time::Init();
@@ -120,38 +115,13 @@ bool Game::Init()
 
 
 					ScreenSurface = SDL_GetWindowSurface(Window);
+					TestSceneOne* one =new  TestSceneOne();
+					TestSceneTwo* two = new  TestSceneTwo();
+					SceneMgr::Register(one);
+					SceneMgr::Register(two);
+					SceneMgr::SetScene(1);
 
-
-					charGO = new GameObject();
-					CMovement* movementComponent = new CMovement();
-					movementComponent->SetSpeed(100.);
-					charGO->AddComponent(movementComponent);
-					charGO->Init(Renderer);
-					charGO->RB = new Rigidbody(charGO);
-					charGO->RB->EnableGravity(false);
-					charGO->transform->position = Vector2(60, 40);
-					
-					charGO->RB->MakeCollider(Vector2(0, 0), 20,20);
-					charGO->tag = "Player";
-					charGO->UpdateLayer(2);
-					charGO->DrawLayer(2);
-					//movementComponent = nullptr;
-
-
-					for (int i = 0; i < 4; i++)
-					{
-
-						Blocks[i] = new GameObject();
-						Blocks[i]->Init(Renderer);
-						Blocks[i]->transform->position = Vector2(90*i+180, 40);
-						Blocks[i]->RB = new Rigidbody(Blocks[i]);
-						Blocks[i]->RB->EnableGravity(false);
-						Blocks[i]->RB->MakeCollider(Vector2(0, 0), 60,60);
-						Blocks[i]->tag = "Block";
-						Blocks[i]->DrawLayer(1);
-						Blocks[i]->transform->Rotate(15*i);
-						
-					}
+				
 				}
 			}
 
@@ -177,30 +147,7 @@ bool Game::LoadMedia()
 		success = false;
 	}*/
 
-	if (!charGO->LoadTexture("Tikki", 80, 80))
-	{
-		printf("Failed to load Tikki' texture image!\n");
-		success = false;
-	}
-	else
-	{
-
-
-		charGO->AddAnimation(0, 0, 2, 0, 4,"idle");
-		charGO->AddAnimation(0, 1, 3, 1, 4,"walk");
-		charGO->AddAnimation(0, 2, 4, 2, 4,"die");
-
-
-	}
-	for (int i = 0; i < 4; i++)
-	{
-
-		if (!Blocks[i]->LoadTexture("Block"))
-		{
-			printf("Failed to load Block texture image!\n");
-			success = false;
-		}
-	}
+	
 	return success;
 }
 
@@ -210,7 +157,7 @@ void Game::End()
 	ScreenSurface = NULL;
 
 	//free texture
-	charGO->Destroy();
+	
 	//gBackgroundTexture->free();
 
 	SDL_DestroyRenderer(Renderer);
@@ -220,4 +167,9 @@ void Game::End()
 
 	IMG_Quit();
 	SDL_Quit();
+}
+
+SDL_Renderer* Game::GetRenderer()
+{
+	return Renderer;
 }

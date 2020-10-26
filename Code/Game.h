@@ -13,7 +13,9 @@ public:
 	bool Init();
 	bool LoadMedia();
 	void End();
+	SDL_Renderer* GetRenderer();
 private:
+	friend class Scene;
 	SDL_Window* Window;
 	SDL_Surface* ScreenSurface;
 	SDL_Renderer* Renderer;

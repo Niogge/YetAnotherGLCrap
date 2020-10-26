@@ -17,14 +17,16 @@ Features:
 - Collisions (SAT, only rect for now)
 - Physics Manager
 - Transform Parenting (missing some features, will implement soon)
+- Scene manager (Still need to find a way to make this more dynamic, but I've got something in mind)
 
 Next steps:
-- Scene manager
+- Sfx manager 
 
 
 Will code someday:
-- Sfx manager 
+- Turn this into a game (or maybe not)
 - Something i'm way too tired to acknowledge now. 
+
 <br>
 <hr/>
 

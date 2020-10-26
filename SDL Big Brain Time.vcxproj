@@ -40,6 +40,10 @@
     <ClInclude Include="Code\Physics\Rect.h" />
     <ClInclude Include="Code\Physics\Rigidbody.h" />
     <ClInclude Include="Code\Physics\Shape.h" />
+    <ClInclude Include="Code\Scene\Scene.h" />
+    <ClInclude Include="Code\Scene\SceneMgr.h" />
+    <ClInclude Include="Code\Scene\TestSceneOne.h" />
+    <ClInclude Include="Code\Scene\TestSceneTwo.h" />
     <ClInclude Include="Code\Time.h" />
     <ClInclude Include="Code\UpdateMgr.h" />
   </ItemGroup>
@@ -59,6 +63,10 @@
     <ClCompile Include="Code\Physics\Rect.cpp" />
     <ClCompile Include="Code\Physics\Rigidbody.cpp" />
     <ClCompile Include="Code\Physics\Shape.cpp" />
+    <ClCompile Include="Code\Scene\Scene.cpp" />
+    <ClCompile Include="Code\Scene\SceneMgr.cpp" />
+    <ClCompile Include="Code\Scene\TestSceneOne.cpp" />
+    <ClCompile Include="Code\Scene\TestSceneTwo.cpp" />
     <ClCompile Include="Code\Time.cpp" />
     <ClCompile Include="Code\UpdateMgr.cpp" />
   </ItemGroup>

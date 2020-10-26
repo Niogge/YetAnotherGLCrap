@@ -21,6 +21,11 @@
 #include "LTexture.h"
 #include "Animation.h"
 #include "Game.h"
+#include "Scene/Scene.h";
+#include "Scene/TestSceneOne.h";
+#include "Scene/TestSceneTwo.h";
+#include "Scene/SceneMgr.h";
+
 #include "ComponentSystem/IComponent.h"
 #include "ComponentSystem/Transform.h"
 #include "ComponentSystem/CMovement.h"
