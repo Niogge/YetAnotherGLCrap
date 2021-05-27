@@ -42,7 +42,8 @@ you want to remove, then do some shady memory allocation magic and substitute th
 UpdateMgr.cpp and DrawMgr.cpp)
 
 <br>
- #### Oh my dear repo 28/05/2021 ####
+
+#### Oh my dear repo 28/05/2021 ####
 Few updates:
 - Focusing on lectures
 - A project I'm working on is going well and we're in the heat of action
