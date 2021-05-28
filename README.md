@@ -48,6 +48,7 @@ Few updates:
 - Focusing on lectures
 - A project I'm working on is going well and we're in the heat of action
 - I've done so much stuff with SDL in this academic year that when I have time I'd rather use it on something that I don't know yet. (Like, I mean, the purpose of this repo was EXACTLY this, doing something that I didn't know yet.) 
+
 So, yes, I will not touch this repository in the foreseeable future, but who knows? Maybe one day I will go over the code and get mad at past me for what I wrote.
 Cya, nerds. 
 
